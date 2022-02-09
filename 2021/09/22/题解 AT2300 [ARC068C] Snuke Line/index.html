@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="zh-CN" >
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<title>题解 AT2300 [ARC068C] Snuke Line - LYC_music的小窝</title>
+    <link rel="alternate" href="" type="application/atom+xml"/>
+	<link rel="shortcut icon" href=""/>
+	
+<link rel="stylesheet" href="/css/style.css">
+
+	
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+	
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body>
+	<div class="main-con">
+
+        <div class="nav cl">
+    <ul class="cl nav-list">
+        
+            <li>
+                
+                    <a href="/" class="">
+                        <i class="fa fa-home"></i> 
+                        <span>主页</span>
+                    </a>
+                
+            </li>
+        
+            <li>
+                
+                    <a href="/archives/" class="">
+                        <i class=" fa-"></i> 
+                        <span>归档</span>
+                    </a>
+                
+            </li>
+        
+            <li>
+                
+                    
+                    <a href="javascript:void(0)" class="">
+                    
+                        <i class=" fa-"></i> 
+                        <span>关于</span>
+                        <span class="drop-flag fa fa-angle-down"></span>
+                    </a>
+                    <dl>
+                        
+                            <li>
+                                <a href="/about" class="">
+                                    <i class=" fa-"></i>
+                                    <span>关于本站</span>
+                                </a>
+                            </li>
+                        
+                    </dl>
+                
+            </li>
+        
+    </ul>
+    <ul class="cl nav-tool">
+        
+            <li>
+                <a href="/github">
+                    <i class="fa fa-github"></i>
+                </a>
+            </li>
+        
+            <li>
+                <a href="/mail">
+                    <i class="fa fa-envelope"></i>
+                </a>
+            </li>
+        
+            <li>
+                <a href="/twitter">
+                    <i class="fa fa-twitter"></i>
+                </a>
+            </li>
+        
+        
+        <li>
+            <a href="javascript:void(0)" class="nav-search-btn">
+                <i class="fa fa-search"></i>
+            </a>
+        </li>
+        
+    </ul>
+    <form action="//google.com/search" method="get" accept-charset="UTF-8" class="nav-search"><input type="search" name="q" class="nav-search-input" placeholder="search..."><input type="hidden" name="sitesearch" value="https://lyc-music.github.io"></form>
+</div>
+
+        <header class="top" id="fallEle" style="background-image: url(/imgs/bella.jpg)">
+    <i class="fa fa-bars" id="media-toggle" style="display: none"></i>
+    <div class="top-info cl fadeToBottom">
+        <h2 class="site-name"><a href="/">LYC_music的小窝</a> <small id="type-data"></small></h2>
+    </div>
+</header>
+
+        <div class="con-wrap fadeToTop">
+    
+    <section class="article-area">
+    
+        <article class="article">
+    <div class="article-wrap">
+        
+            <h2 class="article-title cl">
+                题解 AT2300 [ARC068C] Snuke Line
+            </h2>
+        
+
+        <ul class="article-extra" style="margin-bottom: 20px">
+            
+            <li class="article-time">
+                2021-09-22
+            </li>
+            
+
+            
+                
+            
+
+
+        </ul>
+        <div class="article-description">
+            
+            <p>这里有一种不需要脑子 <span class="math inline">\(O(n\ln n \log n)\)</span> 的做法。</p>
+<p>首先枚举 <span class="math inline">\(d\)</span> ，然后抠出所有 <span class="math inline">\(d\)</span> 的倍数以及 <span class="math inline">\(n\)</span>：<span class="math inline">\(a_1,a_2,a_3……,a_k,a_{k+1}=n\)</span>。</p>
+<p>考虑容斥，去算买不到的商品数，那么就是求</p>
+<p><span class="math display">\[\sum_{i=1}^{k}\sum_{j=1}^m 1[a_i&lt;l_j\leq r_j&lt;a_{i+1}]\]</span></p>
+<p>裸的二维数点问题，转化成矩形内求点数直接扫描线拆成四个点做就好了。</p>
+<p>有个 <span class="math inline">\(4\)</span> 的常数，不过还是很轻易的通过了本题。而且贼好写。 <span id="more"></span> ```c++ //QwQcOrZ yyds!!! #include&lt;bits/stdc++.h&gt; #define ll long long #define F(i,a,b) for (int i=(a);i&lt;=(b);i++) #define R(i,a,b) for (int i=(a);i&lt;(b);i++) #define D(i,a,b) for (int i=(a);i&gt;=(b);i--) #define go(i,x) for (int i=head[x];i;i=e[i].nx) #define IOS ios::sync_with_stdio(false) #define mp make_pair #define pb push_back #define pa pair &lt; int,int &gt; #define fi first #define se second #define re register #define be begin() #define en end() #define sqr(x) ((x)<em>(x)) #define ret return puts("-1"),0; #define put putchar('') #define inf 1000000005 #define mod 998244353 #define int ll #define N 300005 using namespace std; inline char gc(){static char buf[1000000],</em>p1=buf,<em>p2=buf;return p1==p2&amp;&amp;(p2=(p1=buf)+fread(buf,1,1000000,stdin),p1==p2)?EOF:</em>p1++;} #define gc getchar inline ll read(){char c=gc();ll su=0,f=1;for (;c&lt;'0'||c&gt;'9';c=gc()) if (c=='-') f=-1;for (;c&gt;='0'&amp;&amp;c&lt;='9';c=gc()) su=su<em>10+c-'0';return su</em>f;} inline void write(ll x){if (x&lt;0){putchar('-');write(-x);return;}if (x&gt;=10) write(x/10);putchar(x%10+'0');} inline void writesp(ll x){write(x),putchar(' ');} inline void writeln(ll x){write(x);putchar('');} int n,q,s[N],s1[N],sum,x,c[N]; int l,r; struct node { int id,x,fh; }; vector<node>G[N]; vector<int>S[N]; int a[N]; inline void update(int x,int y) { while (x&lt;=n) { c[x]+=y; x+=(x&amp;-x); } } inline int query(int x) { int res=0; while (x) { res+=c[x]; x-=(x&amp;-x); } return res; }</p>
+<p>signed main() { n=read(),q=read(); swap(n,q); for (int i=1;i&lt;=q;i++) { int l=read(),r=read(); s[r]++; s1[l]++; S[l].push_back(r); } for (int i=1;i&lt;=n;i++) s[i]+=s[i-1],s1[i]+=s1[i-1],a[i]=q; writeln(q); for (int i=2;i&lt;=n;i++) { for (int j=0;j&lt;=n;j+=i) { l=j+1,r=min(n,j+i-1); G[l-1].push_back({i,r,-1}); G[l-1].push_back({i,l-1,1}); G[r].push_back({i,r,1}); G[r].push_back({i,l-1,-1}); } } for (int i=1;i&lt;=n;i++) { for (auto u:S[i]) { update(u,1); } for (auto u:G[i]) { a[u.id]-=u.fh<em>query(u.x); } } for (int i=2;i&lt;=n;i++) writeln(a[i]); } /</em> */</p>
+
+        </div>
+        
+        
+        
+        <div class="article-tags">
+            <ul class="tags-list cl">
+                
+                <li><a href="/tags/题解/"><i class="fa fa-tag"></i>题解</a></li>
+                
+            </ul>
+        </div>
+        
+        <div class="article-pagination cl">
+        
+            <div class="pagination-prev">
+                <a href="/2021/09/24/%E9%A2%98%E8%A7%A3%20CF1574D%20The%20Strongest%20Build/">题解 CF1574D The Strongest Build</a>
+            </div>
+        
+        
+            <div class="pagination-next">
+                <a href="/2021/09/18/%E9%A2%98%E8%A7%A3%20AT2161%20%5BARC065D%5D%20%E3%82%B7%E3%83%A3%E3%83%83%E3%83%95%E3%83%AB%20%20Shuffling/">题解 AT2161 [ARC065D] シャッフル  Shuffling</a>
+            </div>
+        
+        </div>
+
+        
+    </div>
+</article>
+
+    </section>
+    
+<section class="tool-area">
+
+    <div class="toolbar">
+        
+
+        
+        <div class="widget-post widget" style="order: 1 ">
+            <h2 class="widget-title"><i class="fa fa-file-text"></i> 近期文章</h2>
+            <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2022/01/25/YACS2022JAN%20%E9%A2%98%E8%A7%A3/">YACS2022 Jan 题解</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/18/CF%203000+%20%E5%8D%B7%E9%A2%98%E8%AE%B0%E5%BD%95/">CF 3000+ 好题卷题记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/04/%E9%A2%98%E8%A7%A3%20AT2536%20%E5%88%87%E7%AC%A6%E3%81%AE%E6%89%8B%E9%85%8D%20(Arranging%20Tickets)/">题解 AT2536 切符の手配 (Arranging Tickets)</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/23/Steiner%20%E4%B8%89%E5%85%83%E7%B3%BB%E5%AD%A6%E4%B9%A0%E5%B0%8F%E8%AE%B0/">Steiner 三元系学习小记</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/14/%E9%A2%98%E8%A7%A3%20P7975%20%E3%80%8CStoi2033%E3%80%8D%E5%88%86%E8%A3%82/">题解 P7975 「Stoi2033」分裂</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/08/%E9%A2%98%E8%A7%A3%20CF886E%20Maximum%20Element/">题解 CF886E Maximum Element</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/23/%E9%A2%98%E8%A7%A3%20CF1612F%20Armor%20and%20Weapons/">题解 CF1612F Armor and Weapons</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/21/%E6%A2%A6%E7%A2%8E%20NOIP2021/">梦碎 NOIP2021</a></li></ul>
+        </div>
+        
+
+        
+        <div class="widget-tags widget" style="order: 2 ">
+            <h2 class="widget-title"><i class="fa fa-tags"></i> 标签</h2>
+            <a href="/tags/%E5%B0%8F%E8%AE%B0/" style="font-size: 10px;">小记</a> <a href="/tags/%E6%B8%B8%E8%AE%B0/" style="font-size: 15px;">游记</a> <a href="/tags/%E9%A2%98%E8%A7%A3/" style="font-size: 20px;">题解</a>
+        </div>
+        
+
+        
+        <div class="widget-categories widget" style="order: 3 ">
+            <h2 class="widget-title"><i class="fa fa-folder-open"></i> 分类</h2>
+            
+        </div>
+        
+
+    </div>
+</section>
+</div>
+
+    
+        <footer class="footer">
+	<p class="footer-intro">
+		
+		@2022 LYC_music的小窝.
+	</p>
+	<p class="footer-intro">
+			Powered By <a href="https://hexo.io/zh-cn/" target="_blank">hexo</a>
+			theme <a href="https://github.com/iengu/hexo-theme-mokusei" target="_blank">mokusei</a> by <a href="https://www.iengu.com" target="blank">iengu</a>
+	</p>
+</footer>
+
+
+
+
+        <div class="extend-tools" id="extend-tools" style="display: none;">
+    <ul>
+        <li class="tools-returnTop" title="返回顶部"><i class="fa fa-angle-double-up"></i></li>
+    </ul>
+</div>
+
+	</div>
+
+	
+<script src="/js/org/jquery.min.js"></script>
+
+    
+<script src="/js/extend.js"></script>
+
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>  
+</body>
+</html>

@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="zh-CN" >
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<title>题解 CF403E Two Rooted Trees - LYC_music的小窝</title>
+    <link rel="alternate" href="" type="application/atom+xml"/>
+	<link rel="shortcut icon" href=""/>
+	
+<link rel="stylesheet" href="/css/style.css">
+
+	
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+	
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body>
+	<div class="main-con">
+
+        <div class="nav cl">
+    <ul class="cl nav-list">
+        
+            <li>
+                
+                    <a href="/" class="">
+                        <i class="fa fa-home"></i> 
+                        <span>主页</span>
+                    </a>
+                
+            </li>
+        
+            <li>
+                
+                    <a href="/archives/" class="">
+                        <i class=" fa-"></i> 
+                        <span>归档</span>
+                    </a>
+                
+            </li>
+        
+            <li>
+                
+                    
+                    <a href="javascript:void(0)" class="">
+                    
+                        <i class=" fa-"></i> 
+                        <span>关于</span>
+                        <span class="drop-flag fa fa-angle-down"></span>
+                    </a>
+                    <dl>
+                        
+                            <li>
+                                <a href="/about" class="">
+                                    <i class=" fa-"></i>
+                                    <span>关于本站</span>
+                                </a>
+                            </li>
+                        
+                    </dl>
+                
+            </li>
+        
+    </ul>
+    <ul class="cl nav-tool">
+        
+            <li>
+                <a href="/github">
+                    <i class="fa fa-github"></i>
+                </a>
+            </li>
+        
+            <li>
+                <a href="/mail">
+                    <i class="fa fa-envelope"></i>
+                </a>
+            </li>
+        
+            <li>
+                <a href="/twitter">
+                    <i class="fa fa-twitter"></i>
+                </a>
+            </li>
+        
+        
+        <li>
+            <a href="javascript:void(0)" class="nav-search-btn">
+                <i class="fa fa-search"></i>
+            </a>
+        </li>
+        
+    </ul>
+    <form action="//google.com/search" method="get" accept-charset="UTF-8" class="nav-search"><input type="search" name="q" class="nav-search-input" placeholder="search..."><input type="hidden" name="sitesearch" value="https://lyc-music.github.io"></form>
+</div>
+
+        <header class="top" id="fallEle" style="background-image: url(/imgs/bella.jpg)">
+    <i class="fa fa-bars" id="media-toggle" style="display: none"></i>
+    <div class="top-info cl fadeToBottom">
+        <h2 class="site-name"><a href="/">LYC_music的小窝</a> <small id="type-data"></small></h2>
+    </div>
+</header>
+
+        <div class="con-wrap fadeToTop">
+    
+    <section class="article-area">
+    
+        <article class="article">
+    <div class="article-wrap">
+        
+            <h2 class="article-title cl">
+                题解 CF403E Two Rooted Trees
+            </h2>
+        
+
+        <ul class="article-extra" style="margin-bottom: 20px">
+            
+            <li class="article-time">
+                2021-11-04
+            </li>
+            
+
+            
+                
+            
+
+
+        </ul>
+        <div class="article-description">
+            
+            <p>这里给出一个不需要树剖的做法。</p>
+<p>对于第一棵树中的一条边 <span class="math inline">\((u,v)\)</span> 设 <span class="math inline">\(v\)</span> 是 <span class="math inline">\(u\)</span> 的儿子。我们设每个点在第一棵树上的 dfs 序为 <span class="math inline">\(a_i\)</span>，第二棵树中为 <span class="math inline">\(b_i\)</span>。显然在第二棵树中需要删掉的边 <span class="math inline">\((x,y)\)</span> 满足 <span class="math inline">\(x,y\)</span> 其中一个的 dfs 序在 <span class="math inline">\(v\)</span> 子树中另一个不在。那么相当于平面上的两个矩形，直接开两个线段树维护即可。</p>
+<p>具体维护方法有很多种，我的方法是把这个点在每个覆盖它的区间都插入一遍，然后区间查询取出的时候判断一下是否已经取出过即可，时间复杂度和空间复杂度 <span class="math inline">\(O(n \log n)\)</span>。</p>
+<span id="more"></span>
+<p>还有一种做法是直接把所有点插入到叶子上，然后线段树上维护是否子树内元素都被取完的标记，每次查询如果没取完就暴力递归，时间复杂度 <span class="math inline">\(O(n\log n)\)</span> 空间复杂度 <span class="math inline">\(O(n)\)</span>。</p>
+<pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> ll long long</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> fi first</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> se second</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> N 200005</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> pa pair<span class="hljs-meta-string">&lt;int,int&gt;</span></span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;
+<span class="hljs-function">ll <span class="hljs-title">read</span><span class="hljs-params">()</span></span>
+<span class="hljs-function"></span>&#123;
+	ll x=<span class="hljs-number">0</span>,fh=<span class="hljs-number">1</span>;
+	<span class="hljs-keyword">char</span> ch=<span class="hljs-built_in">getchar</span>();
+	<span class="hljs-keyword">while</span> (!<span class="hljs-built_in">isdigit</span>(ch))
+	&#123;
+		<span class="hljs-keyword">if</span> (ch==<span class="hljs-string">&#x27;-&#x27;</span>) fh=<span class="hljs-number">-1</span>;
+		ch=<span class="hljs-built_in">getchar</span>();
+	&#125;
+	<span class="hljs-keyword">while</span> (<span class="hljs-built_in">isdigit</span>(ch))
+	&#123;
+		x=x*<span class="hljs-number">10</span>+ch-<span class="hljs-string">&#x27;0&#x27;</span>;
+		ch=<span class="hljs-built_in">getchar</span>();
+	&#125;
+	<span class="hljs-keyword">return</span> fh*x;
+&#125;
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">write</span><span class="hljs-params">(ll x)</span></span>
+<span class="hljs-function"></span>&#123;
+	<span class="hljs-keyword">if</span> (x&lt;<span class="hljs-number">0</span>)
+	&#123;
+		<span class="hljs-built_in">putchar</span>(<span class="hljs-string">&#x27;-&#x27;</span>);
+		<span class="hljs-built_in">write</span>(-x);
+		<span class="hljs-keyword">return</span>;
+	&#125;
+	<span class="hljs-keyword">if</span> (x&gt;=<span class="hljs-number">10</span>) <span class="hljs-built_in">write</span>(x/<span class="hljs-number">10</span>);
+	<span class="hljs-built_in">putchar</span>(<span class="hljs-string">&#x27;0&#x27;</span>+x%<span class="hljs-number">10</span>);
+&#125;
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">writeln</span><span class="hljs-params">(ll x)</span></span>
+<span class="hljs-function"></span>&#123;
+	<span class="hljs-built_in">write</span>(x);
+	<span class="hljs-built_in">putchar</span>(<span class="hljs-string">&#x27;\n&#x27;</span>);
+&#125;
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">writesp</span><span class="hljs-params">(ll x)</span></span>
+<span class="hljs-function"></span>&#123;
+	<span class="hljs-built_in">write</span>(x);
+	<span class="hljs-built_in">putchar</span>(<span class="hljs-string">&#x27; &#x27;</span>);
+&#125;
+<span class="hljs-keyword">int</span> st;
+<span class="hljs-keyword">int</span> n;
+vector&lt;<span class="hljs-keyword">int</span>&gt;S;
+<span class="hljs-keyword">int</span> sm;
+vector&lt;pair&lt;<span class="hljs-keyword">int</span>,pa&gt;&gt;Wt[<span class="hljs-number">2</span>];
+<span class="hljs-keyword">int</span> vis[<span class="hljs-number">2</span>][N];
+<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">CWT_Mei_Ma</span></span>
+<span class="hljs-class">&#123;</span>
+	<span class="hljs-keyword">int</span> num,cnt;
+	vector&lt;<span class="hljs-keyword">int</span>&gt;G[N];
+	<span class="hljs-keyword">int</span> Dfn;
+	<span class="hljs-keyword">int</span> ldfn[N],rdfn[N],dfn[N];
+	vector&lt;pa&gt;tr[N&lt;&lt;<span class="hljs-number">2</span>];
+	<span class="hljs-keyword">int</span> Ltr[N&lt;&lt;<span class="hljs-number">2</span>],Rtr[N&lt;&lt;<span class="hljs-number">2</span>];
+	pa E[N];
+	<span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-title">init</span><span class="hljs-params">()</span></span>
+<span class="hljs-function">	</span>&#123;
+		<span class="hljs-built_in">memset</span>(Rtr,<span class="hljs-number">-1</span>,<span class="hljs-built_in"><span class="hljs-keyword">sizeof</span></span>(Rtr));
+	&#125;
+	<span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ad</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x,<span class="hljs-keyword">int</span> y)</span></span>
+<span class="hljs-function">	</span>&#123;
+		++cnt;
+		E[cnt].fi=x,E[cnt].se=y;
+		G[x].<span class="hljs-built_in">push_back</span>(y);
+	&#125;
+	<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">dfs</span><span class="hljs-params">(<span class="hljs-keyword">int</span> k,<span class="hljs-keyword">int</span> fa)</span></span>
+<span class="hljs-function">	</span>&#123;
+		++Dfn;
+		ldfn[k]=dfn[k]=Dfn;
+		<span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> u:G[k])
+		&#123;
+			<span class="hljs-built_in">dfs</span>(u,k);
+		&#125;
+		rdfn[k]=Dfn;
+	&#125;
+	<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">update</span><span class="hljs-params">(<span class="hljs-keyword">int</span> k,<span class="hljs-keyword">int</span> l,<span class="hljs-keyword">int</span> r,<span class="hljs-keyword">int</span> x,<span class="hljs-keyword">int</span> y,<span class="hljs-keyword">int</span> i)</span></span>
+<span class="hljs-function">	</span>&#123;
+		<span class="hljs-keyword">if</span> (l==r)
+		&#123;
+			tr[k].<span class="hljs-built_in">push_back</span>(&#123;y,i&#125;);
+			Rtr[k]=tr[k].<span class="hljs-built_in">size</span>()<span class="hljs-number">-1</span>;
+			cnt=<span class="hljs-built_in">max</span>(cnt,k);
+			<span class="hljs-keyword">return</span>;
+		&#125;
+		tr[k].<span class="hljs-built_in">push_back</span>(&#123;y,i&#125;);
+		Rtr[k]=tr[k].<span class="hljs-built_in">size</span>()<span class="hljs-number">-1</span>;
+		<span class="hljs-keyword">int</span> mid=l+(r-l)/<span class="hljs-number">2</span>;
+		<span class="hljs-keyword">if</span> (x&lt;=mid) <span class="hljs-built_in">update</span>(k&lt;&lt;<span class="hljs-number">1</span>,l,mid,x,y,i);
+		<span class="hljs-keyword">else</span> <span class="hljs-built_in">update</span>(k&lt;&lt;<span class="hljs-number">1</span>|<span class="hljs-number">1</span>,mid+<span class="hljs-number">1</span>,r,x,y,i);
+	&#125;
+	vector&lt;<span class="hljs-keyword">int</span>&gt;<span class="hljs-built_in">query</span>(<span class="hljs-keyword">int</span> k,<span class="hljs-keyword">int</span> l,<span class="hljs-keyword">int</span> r,<span class="hljs-keyword">int</span> L,<span class="hljs-keyword">int</span> R,<span class="hljs-keyword">int</span> val,<span class="hljs-keyword">int</span> fh)
+	&#123;
+		<span class="hljs-keyword">if</span> (tr[k].<span class="hljs-built_in">empty</span>()) <span class="hljs-keyword">return</span> vector&lt;<span class="hljs-keyword">int</span>&gt;();
+		<span class="hljs-keyword">if</span> (L&lt;=l&amp;&amp;r&lt;=R)
+		&#123;
+			vector&lt;<span class="hljs-keyword">int</span>&gt;g;
+			<span class="hljs-keyword">if</span> (fh==<span class="hljs-number">0</span>)
+			&#123;
+				<span class="hljs-keyword">while</span> (Ltr[k]&lt;=Rtr[k])
+				&#123;
+					<span class="hljs-keyword">if</span> (tr[k][Rtr[k]].fi&lt;val) <span class="hljs-keyword">break</span>;
+					<span class="hljs-keyword">if</span> (!vis[num^<span class="hljs-number">1</span>][tr[k][Rtr[k]].se])
+					&#123;
+						vis[num^<span class="hljs-number">1</span>][tr[k][Rtr[k]].se]=<span class="hljs-number">1</span>;
+						g.<span class="hljs-built_in">push_back</span>(tr[k][Rtr[k]].se);
+					&#125;
+					Rtr[k]--;
+				&#125;
+			&#125; <span class="hljs-keyword">else</span>
+			&#123;
+				<span class="hljs-keyword">while</span> (Ltr[k]&lt;=Rtr[k])
+				&#123;
+					<span class="hljs-keyword">if</span> (tr[k][Ltr[k]].fi&gt;val) <span class="hljs-keyword">break</span>;
+					<span class="hljs-keyword">if</span> (!vis[num^<span class="hljs-number">1</span>][tr[k][Ltr[k]].se])
+					&#123;
+						vis[num^<span class="hljs-number">1</span>][tr[k][Ltr[k]].se]=<span class="hljs-number">1</span>;
+						g.<span class="hljs-built_in">push_back</span>(tr[k][Ltr[k]].se);
+					&#125;
+					Ltr[k]++;
+				&#125;
+			&#125;
+			<span class="hljs-keyword">return</span> g;
+		&#125;
+		<span class="hljs-keyword">int</span> mid=l+(r-l)/<span class="hljs-number">2</span>;
+		<span class="hljs-keyword">if</span> (R&lt;=mid) <span class="hljs-keyword">return</span> <span class="hljs-built_in">query</span>(k&lt;&lt;<span class="hljs-number">1</span>,l,mid,L,R,val,fh);
+		<span class="hljs-keyword">if</span> (L&gt;mid) <span class="hljs-keyword">return</span> <span class="hljs-built_in">query</span>(k&lt;&lt;<span class="hljs-number">1</span>|<span class="hljs-number">1</span>,mid+<span class="hljs-number">1</span>,r,L,R,val,fh);
+		<span class="hljs-keyword">auto</span> X=<span class="hljs-built_in">query</span>(k&lt;&lt;<span class="hljs-number">1</span>,l,mid,L,R,val,fh);
+		<span class="hljs-keyword">auto</span> Y=<span class="hljs-built_in">query</span>(k&lt;&lt;<span class="hljs-number">1</span>|<span class="hljs-number">1</span>,mid+<span class="hljs-number">1</span>,r,L,R,val,fh);
+		<span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> u:Y) X.<span class="hljs-built_in">push_back</span>(u);
+		<span class="hljs-keyword">return</span> X;
+	&#125;
+&#125;T[<span class="hljs-number">2</span>];
+<span class="hljs-function"><span class="hljs-keyword">signed</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>
+<span class="hljs-function"></span>&#123;
+	n=<span class="hljs-built_in">read</span>();
+	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i=<span class="hljs-number">2</span>;i&lt;=n;i++)
+	&#123;
+		<span class="hljs-keyword">int</span> x=<span class="hljs-built_in">read</span>();
+		T[<span class="hljs-number">0</span>].<span class="hljs-built_in">ad</span>(x,i);
+	&#125;
+	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i=<span class="hljs-number">2</span>;i&lt;=n;i++)
+	&#123;
+		<span class="hljs-keyword">int</span> x=<span class="hljs-built_in">read</span>();
+		T[<span class="hljs-number">1</span>].<span class="hljs-built_in">ad</span>(x,i);
+	&#125;
+	T[<span class="hljs-number">0</span>].<span class="hljs-built_in">dfs</span>(<span class="hljs-number">1</span>,<span class="hljs-number">0</span>);
+	T[<span class="hljs-number">1</span>].<span class="hljs-built_in">dfs</span>(<span class="hljs-number">1</span>,<span class="hljs-number">0</span>);
+	T[<span class="hljs-number">0</span>].<span class="hljs-built_in">init</span>();
+	T[<span class="hljs-number">1</span>].<span class="hljs-built_in">init</span>();
+	T[<span class="hljs-number">0</span>].num=<span class="hljs-number">0</span>;
+	T[<span class="hljs-number">1</span>].num=<span class="hljs-number">1</span>;
+	st=<span class="hljs-built_in">read</span>();
+	S.<span class="hljs-built_in">push_back</span>(st);
+	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> now=<span class="hljs-number">0</span>;now&lt;=<span class="hljs-number">1</span>;now++)
+	&#123;
+		<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;n;i++)
+		&#123;
+			<span class="hljs-keyword">if</span> (now==<span class="hljs-number">0</span>&amp;&amp;i==st) <span class="hljs-keyword">continue</span>;
+			<span class="hljs-keyword">int</span> x=T[now^<span class="hljs-number">1</span>].dfn[T[now].E[i].fi],y=T[now^<span class="hljs-number">1</span>].dfn[T[now].E[i].se];
+			Wt[now^<span class="hljs-number">1</span>].<span class="hljs-built_in">push_back</span>(&#123;y,&#123;x,i&#125;&#125;);
+			Wt[now^<span class="hljs-number">1</span>].<span class="hljs-built_in">push_back</span>(&#123;x,&#123;y,i&#125;&#125;);
+		&#125;
+	&#125;
+	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> now=<span class="hljs-number">0</span>;now&lt;=<span class="hljs-number">1</span>;now++) 
+		<span class="hljs-built_in">sort</span>(Wt[now].<span class="hljs-built_in">begin</span>(),Wt[now].<span class="hljs-built_in">end</span>());
+	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> u:Wt[<span class="hljs-number">0</span>])
+	&#123;
+		T[<span class="hljs-number">0</span>].<span class="hljs-built_in">update</span>(<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,n,u.se.fi,u.fi,u.se.se);
+	&#125;
+	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> u:Wt[<span class="hljs-number">1</span>])
+	&#123;
+		T[<span class="hljs-number">1</span>].<span class="hljs-built_in">update</span>(<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,n,u.se.fi,u.fi,u.se.se);
+	&#125;	
+	<span class="hljs-built_in">puts</span>(<span class="hljs-string">&quot;Blue&quot;</span>);
+	<span class="hljs-built_in">writeln</span>(st);
+	<span class="hljs-keyword">int</span> now=<span class="hljs-number">0</span>;
+	<span class="hljs-keyword">while</span> (!S.<span class="hljs-built_in">empty</span>())
+	&#123;
+		vector&lt;<span class="hljs-keyword">int</span>&gt;G;
+		<span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> u:S)
+		&#123;
+			vector&lt;<span class="hljs-keyword">int</span>&gt;g=T[now].<span class="hljs-built_in">query</span>(<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,n,T[now].ldfn[T[now].E[u].se],T[now].rdfn[T[now].E[u].se],T[now].rdfn[T[now].E[u].se]+<span class="hljs-number">1</span>,<span class="hljs-number">0</span>);
+			<span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> i:g)
+			&#123;
+				G.<span class="hljs-built_in">push_back</span>(i);
+			&#125;
+			g=T[now].<span class="hljs-built_in">query</span>(<span class="hljs-number">1</span>,<span class="hljs-number">1</span>,n,T[now].ldfn[T[now].E[u].se],T[now].rdfn[T[now].E[u].se],T[now].ldfn[T[now].E[u].se]<span class="hljs-number">-1</span>,<span class="hljs-number">1</span>);
+			<span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> i:g)
+			&#123;
+				G.<span class="hljs-built_in">push_back</span>(i);
+			&#125;
+		&#125;
+		S.<span class="hljs-built_in">swap</span>(G);
+		<span class="hljs-keyword">if</span> (S.<span class="hljs-built_in">empty</span>()) <span class="hljs-keyword">break</span>;
+		<span class="hljs-keyword">if</span> (now==<span class="hljs-number">0</span>) <span class="hljs-built_in">puts</span>(<span class="hljs-string">&quot;Red&quot;</span>);
+		<span class="hljs-keyword">else</span> <span class="hljs-built_in">puts</span>(<span class="hljs-string">&quot;Blue&quot;</span>); 
+		<span class="hljs-built_in">sort</span>(S.<span class="hljs-built_in">begin</span>(),S.<span class="hljs-built_in">end</span>());
+		<span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> u:S) <span class="hljs-built_in">writesp</span>(u);
+		<span class="hljs-built_in">puts</span>(<span class="hljs-string">&quot;&quot;</span>);
+		now^=<span class="hljs-number">1</span>;
+	&#125;
+&#125;</code></pre>
+
+        </div>
+        
+        
+        
+        <div class="article-tags">
+            <ul class="tags-list cl">
+                
+                <li><a href="/tags/题解/"><i class="fa fa-tag"></i>题解</a></li>
+                
+            </ul>
+        </div>
+        
+        <div class="article-pagination cl">
+        
+            <div class="pagination-prev">
+                <a href="/2021/11/08/%E9%A2%98%E8%A7%A3%20CF1131E%20String%20Multiplication/">题解 CF1131E String Multiplication</a>
+            </div>
+        
+        
+            <div class="pagination-next">
+                <a href="/2021/11/02/%E9%A2%98%E8%A7%A3%20CF1237E%20Balanced%20Binary%20Search%20Trees/">题解 CF1237E Balanced Binary Search Trees</a>
+            </div>
+        
+        </div>
+
+        
+    </div>
+</article>
+
+    </section>
+    
+<section class="tool-area">
+
+    <div class="toolbar">
+        
+
+        
+        <div class="widget-post widget" style="order: 1 ">
+            <h2 class="widget-title"><i class="fa fa-file-text"></i> 近期文章</h2>
+            <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2022/01/25/YACS2022JAN%20%E9%A2%98%E8%A7%A3/">YACS2022 Jan 题解</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/18/CF%203000+%20%E5%8D%B7%E9%A2%98%E8%AE%B0%E5%BD%95/">CF 3000+ 好题卷题记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/04/%E9%A2%98%E8%A7%A3%20AT2536%20%E5%88%87%E7%AC%A6%E3%81%AE%E6%89%8B%E9%85%8D%20(Arranging%20Tickets)/">题解 AT2536 切符の手配 (Arranging Tickets)</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/23/Steiner%20%E4%B8%89%E5%85%83%E7%B3%BB%E5%AD%A6%E4%B9%A0%E5%B0%8F%E8%AE%B0/">Steiner 三元系学习小记</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/14/%E9%A2%98%E8%A7%A3%20P7975%20%E3%80%8CStoi2033%E3%80%8D%E5%88%86%E8%A3%82/">题解 P7975 「Stoi2033」分裂</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/08/%E9%A2%98%E8%A7%A3%20CF886E%20Maximum%20Element/">题解 CF886E Maximum Element</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/23/%E9%A2%98%E8%A7%A3%20CF1612F%20Armor%20and%20Weapons/">题解 CF1612F Armor and Weapons</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/21/%E6%A2%A6%E7%A2%8E%20NOIP2021/">梦碎 NOIP2021</a></li></ul>
+        </div>
+        
+
+        
+        <div class="widget-tags widget" style="order: 2 ">
+            <h2 class="widget-title"><i class="fa fa-tags"></i> 标签</h2>
+            <a href="/tags/%E5%B0%8F%E8%AE%B0/" style="font-size: 10px;">小记</a> <a href="/tags/%E6%B8%B8%E8%AE%B0/" style="font-size: 15px;">游记</a> <a href="/tags/%E9%A2%98%E8%A7%A3/" style="font-size: 20px;">题解</a>
+        </div>
+        
+
+        
+        <div class="widget-categories widget" style="order: 3 ">
+            <h2 class="widget-title"><i class="fa fa-folder-open"></i> 分类</h2>
+            
+        </div>
+        
+
+    </div>
+</section>
+</div>
+
+    
+        <footer class="footer">
+	<p class="footer-intro">
+		
+		@2022 LYC_music的小窝.
+	</p>
+	<p class="footer-intro">
+			Powered By <a href="https://hexo.io/zh-cn/" target="_blank">hexo</a>
+			theme <a href="https://github.com/iengu/hexo-theme-mokusei" target="_blank">mokusei</a> by <a href="https://www.iengu.com" target="blank">iengu</a>
+	</p>
+</footer>
+
+
+
+
+        <div class="extend-tools" id="extend-tools" style="display: none;">
+    <ul>
+        <li class="tools-returnTop" title="返回顶部"><i class="fa fa-angle-double-up"></i></li>
+    </ul>
+</div>
+
+	</div>
+
+	
+<script src="/js/org/jquery.min.js"></script>
+
+    
+<script src="/js/extend.js"></script>
+
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>  
+</body>
+</html>

@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="zh-CN" >
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<title>CF 3000+ 好题卷题记录 - LYC_music的小窝</title>
+    <link rel="alternate" href="" type="application/atom+xml"/>
+	<link rel="shortcut icon" href=""/>
+	
+<link rel="stylesheet" href="/css/style.css">
+
+	
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+	
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body>
+	<div class="main-con">
+
+        <div class="nav cl">
+    <ul class="cl nav-list">
+        
+            <li>
+                
+                    <a href="/" class="">
+                        <i class="fa fa-home"></i> 
+                        <span>主页</span>
+                    </a>
+                
+            </li>
+        
+            <li>
+                
+                    <a href="/archives/" class="">
+                        <i class=" fa-"></i> 
+                        <span>归档</span>
+                    </a>
+                
+            </li>
+        
+            <li>
+                
+                    
+                    <a href="javascript:void(0)" class="">
+                    
+                        <i class=" fa-"></i> 
+                        <span>关于</span>
+                        <span class="drop-flag fa fa-angle-down"></span>
+                    </a>
+                    <dl>
+                        
+                            <li>
+                                <a href="/about" class="">
+                                    <i class=" fa-"></i>
+                                    <span>关于本站</span>
+                                </a>
+                            </li>
+                        
+                    </dl>
+                
+            </li>
+        
+    </ul>
+    <ul class="cl nav-tool">
+        
+            <li>
+                <a href="/github">
+                    <i class="fa fa-github"></i>
+                </a>
+            </li>
+        
+            <li>
+                <a href="/mail">
+                    <i class="fa fa-envelope"></i>
+                </a>
+            </li>
+        
+            <li>
+                <a href="/twitter">
+                    <i class="fa fa-twitter"></i>
+                </a>
+            </li>
+        
+        
+        <li>
+            <a href="javascript:void(0)" class="nav-search-btn">
+                <i class="fa fa-search"></i>
+            </a>
+        </li>
+        
+    </ul>
+    <form action="//google.com/search" method="get" accept-charset="UTF-8" class="nav-search"><input type="search" name="q" class="nav-search-input" placeholder="search..."><input type="hidden" name="sitesearch" value="https://lyc-music.github.io"></form>
+</div>
+
+        <header class="top" id="fallEle" style="background-image: url(/imgs/bella.jpg)">
+    <i class="fa fa-bars" id="media-toggle" style="display: none"></i>
+    <div class="top-info cl fadeToBottom">
+        <h2 class="site-name"><a href="/">LYC_music的小窝</a> <small id="type-data"></small></h2>
+    </div>
+</header>
+
+        <div class="con-wrap fadeToTop">
+    
+    <section class="article-area">
+    
+        <article class="article">
+    <div class="article-wrap">
+        
+            <h2 class="article-title cl">
+                CF 3000+ 好题卷题记录
+            </h2>
+        
+
+        <ul class="article-extra" style="margin-bottom: 20px">
+            
+            <li class="article-time">
+                2022-01-18
+            </li>
+            
+
+            
+                
+            
+
+
+        </ul>
+        <div class="article-description">
+            
+            <p>怕做难题后过些天就又不会了，于是回来写写看看自己还能想起来多少。</p>
+<span id="more"></span>
+<h2 id="cf1456e-xor-ranges"><a target="_blank" rel="noopener" href="https://codeforces.com/contest/1456/problem/E">CF1456E</a> Xor Ranges</h2>
+<p>有 <span class="math inline">\(n\)</span> 个位数不超过 <span class="math inline">\(K\)</span> 的二进制变量 <span class="math inline">\(x_1,x_2,\dots,x_n\)</span>，其中 <span class="math inline">\(x_i\)</span> 的取值范围是 <span class="math inline">\([l_i,r_i]\)</span>。</p>
+<p>给出数列 <span class="math inline">\(c_0,c_1,\dots,c_{K-1}\)</span>，并由此定义一个代价函数 <span class="math inline">\(f(x)\)</span>：</p>
+<p><span class="math display">\[f(x)=\sum_{i=0}^{K-1}(\lfloor\tfrac x{2^i}\rfloor\bmod 2)\cdot c_i\]</span></p>
+<p>换句话说，<span class="math inline">\(f(x)\)</span> 表示：如果 <span class="math inline">\(x\)</span> 的二进制第 <span class="math inline">\(i\)</span> 位是 <span class="math inline">\(1\)</span>，则代价加上 <span class="math inline">\(c_i\)</span>。</p>
+<p>现在你需要确定每个变量的取值，使得 <span class="math inline">\(\sum_{i=2}^nf(x_i\mathbf{\ xor\ }x_{i-1})\)</span> 最小；输出该最小值。</p>
+<p><span class="math inline">\(2\le n\le50\)</span>，<span class="math inline">\(1\le K\le50\)</span>，<span class="math inline">\(0\le l_i\le r_i &lt; 2^K\)</span>，<span class="math inline">\(0\le c_i\le10^{12}\)</span>。</p>
+<hr />
+<p>从高位往低位填，考虑一个位置如果在某个时刻不和上边界或下边界贴贴了（下文定义之为解除限制），那么它下面的那些位都可以根据相邻的两个数这一位的取值来选择填 <span class="math inline">\(0/1\)</span> 。</p>
+<p>考虑一个笛卡尔树的结构，我们按每个数解除限制的那一位从低向高建笛卡尔树，并通过它的结构来进行 dp。</p>
+<p>设 <span class="math inline">\(dp_{i,j,k,0/1,0/1}\)</span> 为当前在第 <span class="math inline">\(k\)</span> 位，区间 <span class="math inline">\([i,j]\)</span> 内解除限制的那位均高于或等于 <span class="math inline">\(i-1\)</span> 和 <span class="math inline">\(j+1\)</span> 且高于或等于第 <span class="math inline">\(k\)</span> 位，且 <span class="math inline">\(i-1\)</span> 贴得是上边界还是下边界。</p>
+<p>我们考虑如果当前没有数在第 <span class="math inline">\(k\)</span> 位解除限制的话我们就从 <span class="math inline">\(k+1\)</span> 转移过来。然后在这个时候我们就发现了问题，如果 <span class="math inline">\(i-1\)</span> 或者 <span class="math inline">\(j+1\)</span> 是在第 <span class="math inline">\(k\)</span> 的时候解除限制的时候我们怎么算贡献呢？所以我们还需要在原来的状态中再记两个 <span class="math inline">\(0/1\)</span> 表示 <span class="math inline">\(i-1\)</span> 或 <span class="math inline">\(j-1\)</span> 是不是在当前这一位解除限制的。</p>
+<p>如果区间中存在第 <span class="math inline">\(k\)</span> 位解除限制的数的话直接转移过来就行了。</p>
+<p>时间复杂度 <span class="math inline">\(O(n^4)\)</span> 。</p>
+<h2 id="cf1548e-gregor-and-the-two-painters"><a href="%5BProblem%20-%20E%20-%20Codeforces%5D(https://codeforces.com/contest/1548/problem/E)">CF1548E Gregor and the Two Painters</a></h2>
+<p>给定两个长度分别为 <span class="math inline">\(n,m\)</span> 的序列 <span class="math inline">\(a,b\)</span> 和一个参数 <span class="math inline">\(x\)</span></p>
+<p>生成一个 <span class="math inline">\(n\times m\)</span> 的黑白矩阵，<span class="math inline">\((i,j)\)</span> 为黑当且仅当 <span class="math inline">\(a_i+b_j\leq x\)</span></p>
+<p>求矩阵内黑色四联通块数</p>
+<p><span class="math inline">\(n,m,a_i,b_i\leq 2\times 10^5\)</span>。</p>
+<hr />
+<p>考虑把每个联通块标记在当前这个联通块 <span class="math inline">\(a_i+b_j\)</span> 最小的那个位置上，若值相同按 <span class="math inline">\(i,j\)</span> 两个关键字先后排序。</p>
+<p>设当前点为 <span class="math inline">\((i,j)\)</span>，<span class="math inline">\(pre_i\)</span> 为前 <span class="math inline">\(i-1\)</span> 中最靠后的 <span class="math inline">\(a_k\leq a_i\)</span>，<span class="math inline">\(suf_i\)</span> 为 <span class="math inline">\(i\)</span> 后面最靠前的 <span class="math inline">\(a_k&lt; a_i\)</span>。那么显然 <span class="math inline">\((i,j)\)</span> 被标记当且仅当它走不到第 <span class="math inline">\(pre_i\)</span> 行和第 <span class="math inline">\(suf_i\)</span> 行，对于列的情况同理。</p>
+<p>注意到一个性质：如果能走到第 <span class="math inline">\(pre_i\)</span> 行的时候一定能走到 <span class="math inline">\((pre_i,j)\)</span>。</p>
+<p>证明考虑如果当前 <span class="math inline">\((i,j)\)</span> 能走到 <span class="math inline">\(pre_i\)</span> 行上的一个点考虑路径是怎么样的，首先肯定是走到一个 <span class="math inline">\((i,k&#39;)\)</span>，满足其是 <span class="math inline">\((i,j)\)</span> 能走到的最小的 <span class="math inline">\(b_k&#39;\)</span>，从这个列走上去一定是最优的，然后再从 <span class="math inline">\((pre_i,k&#39;)\)</span> 走到它能到的点，容易发现 <span class="math inline">\((pre_i,k&#39;)\)</span> 能在当前行走到的列一定是 <span class="math inline">\((i,j)\)</span> 能走到的超集，然后一定能走到 <span class="math inline">\((pre_i,j)\)</span>。（这一部分当时做题的时候没有好好想证明，现在回过头来好好想了一下）</p>
+<p>我们发现一个被标记的 <span class="math inline">\((i,j)\)</span> 一定是形如上面的 <span class="math inline">\(j=k&#39;\)</span> 的，那么我们如果能走到实际上的路径就相当于是直接从 <span class="math inline">\((i,j)\)</span> 向上走到 <span class="math inline">\((pre_i,j)\)</span> 的一个直线。 所以现在问题就转化成了很简洁的一个形式。</p>
+<p>统计满足下面几个条件的 <span class="math inline">\((i,j)\)</span>：</p>
+<ul>
+<li><span class="math inline">\(a_i+b_j\leq x\)</span></li>
+<li><span class="math inline">\(\max_a[prea_i,i]+b_j\leq x\)</span></li>
+<li><span class="math inline">\(\max_a[i,sufa_i]+b_j\leq x\)</span></li>
+<li><span class="math inline">\(\max_b[preb_j,j]+a_i\leq x\)</span></li>
+<li><span class="math inline">\(\max_b[j,sufb_j]+a_i\leq x\)</span></li>
+</ul>
+<p>然后就可以直接做了，枚举 <span class="math inline">\(i\)</span> 合法的 <span class="math inline">\(j\)</span> 相当于是一个二维偏序，直接扫描线+树状数组即可。</p>
+<h2 id="cf1336f-journey"><a href="%5BProblem%20-%201147F%20-%20Codeforces%5D(https://codeforces.com/problemset/problem/1147/F)">CF1336F Journey</a></h2>
+<p>给定一棵树和 <span class="math inline">\(m\)</span> 条链，求多少对链的交中包含的边数 <span class="math inline">\(\geq k\)</span>。</p>
+<p>$ 2 n, m  ^5 $ , $ 1kn $。</p>
+<hr />
+<p>这道题感觉主要难点在想到第三个 case，但是实际上第三个样例就可以发现第三个 case 的存在，所以感觉挺简单的一道 3500 应该是。</p>
+<h4 id="两条链的-lca-不相同">两条链的 lca 不相同</h4>
+<p>最容易的一个 case。</p>
+<p><img src="https://codeforces.ml/predownloaded/95/e5/95e531fd6d6710c30f67f54a3a70332bfdde45a0.png" /></p>
+<p>发现链的交一定是 lca 更深的链向下延伸的一条链，只要在 dfs 过程中 到 A 的地方时在 E 处单点加，然后在 B 处向下走 <span class="math inline">\(k\)</span> 步后子树查询即可。</p>
+<h3 id="两条链的-lca-相同">两条链的 lca 相同</h3>
+<p>容易想到的一种情况是下面这种：</p>
+<p><img src="https://i.loli.net/2020/04/17/d9bnVfKIF3LoyGB.png" /></p>
+<p>这时候 <span class="math inline">\(dfn_B&lt;dfn_C&lt;dfn_E&lt;dfn_F\)</span> 。考虑这种情况怎么做，我们枚举点 A 然后对于所有链的左端点在 A 子树内的每条链一棵棵子树查询并插入，做法与上面类似，假设插入 <span class="math inline">\((B,E)\)</span> ，直接 <span class="math inline">\(E\)</span> 处单点加，查询 <span class="math inline">\((C,F)\)</span> 就是从 A 向 <span class="math inline">\(F\)</span> 走 <span class="math inline">\(k\)</span> 步的点子树查。这部分需要枚举点 <span class="math inline">\(X\)</span> 然后对所有 lca 为 <span class="math inline">\(X\)</span> 的链的左端点建虚树，过程中支持启发式合并。</p>
+<p>还有一种引荐情况，比较难想到的情况：</p>
+<p><img src="https://i.loli.net/2020/04/17/fMFSq7ialm8RDC5.png" /></p>
+<p>这时候 <span class="math inline">\(dfn_A&lt;dfn_E&lt;dfn_D&lt;dfn_C\)</span> 。做法也很 naive，就不提了。</p>
+<p>总时间复杂度 <span class="math inline">\(O(n\log^2n)\)</span>。</p>
+<h2 id="cf1458f-range-diameter-sum"><a href="%5BProblem%20-%201458F%20-%20Codeforces%5D(https://codeforces.com/problemset/problem/1458/F)">CF1458F Range Diameter Sum</a></h2>
+<p>给定一棵包含 <span class="math inline">\(n\)</span> 个节点(编号 <span class="math inline">\(1\)</span> 到 <span class="math inline">\(n\)</span>), <span class="math inline">\(n-1\)</span> 条长度为 <span class="math inline">\(1\)</span> 的无向边的树.</p>
+<p>设 <span class="math inline">\(d(u,v)\)</span> 为编号 <span class="math inline">\(u\)</span> 到编号 <span class="math inline">\(v\)</span> 两点之间唯一路径的长度.</p>
+<p>设 <span class="math inline">\(f(l,r)\)</span> 为 <span class="math inline">\(\max\{d(u,v)\}.(l\leq u,v\leq r)\)</span></p>
+<p>求：<span class="math inline">\(\sum_{l=1}^{n}\sum_{r=l}^{n}f(l,r)\)</span>。</p>
+<p>第一行输入 <span class="math inline">\(1\)</span> 个整数 <span class="math inline">\(n(1\leq n\leq 10^5)\)</span>.</p>
+<p>接下来 <span class="math inline">\(n-1\)</span> 行,每行两个整数 <span class="math inline">\(x,y\)</span> 表示编号为 <span class="math inline">\(x\)</span> 和编号为 <span class="math inline">\(y\)</span> 的点之间有一条长度为 <span class="math inline">\(1\)</span> 的边<span class="math inline">\((1\leq x,y\leq n)\)</span>,保证给定的图是一棵树.</p>
+<p>输出对于这棵树,上述表达式的值。</p>
+<hr />
+<p>需要利用到树上圆理论，设 <span class="math inline">\(f(i,j)\)</span> 为距离 <span class="math inline">\(i\)</span> 距离不超过 <span class="math inline">\(j\)</span> 的点集，<span class="math inline">\(i\)</span> 可能是一个点也可能是两点之间的一条边。这里我们把在一条边上的情况去掉，具体方法就是对边建虚点，然后 <span class="math inline">\(j=2\times j\)</span>。</p>
+<p><span class="math inline">\([l,r]\)</span> 的点的最长直径本质上就是 连接<span class="math inline">\([l,r]\)</span> 中的点的一个联通块构成的一个树上圆的直径。</p>
+<p>我们考虑两个树上圆怎么合并。</p>
+<p>如果两个圆有包含关系，判断方法很简单，如果 <span class="math inline">\(f(i,j)\)</span> 包含 <span class="math inline">\(f(a,b)\)</span> 那么只要判断 <span class="math inline">\(b+dis(i,a)\leq j\)</span> 即可。</p>
+<p>如果两个圆有交或无交，两个圆合并过后的圆心即为 <span class="math inline">\(i\)</span> 向 <span class="math inline">\(a\)</span> 走 <span class="math inline">\(\frac{j+b+dis(i,a)}{2}\)</span> 步的点，半径即为 <span class="math inline">\(\frac{j+b+dis(i,a)}{2}\)</span>。</p>
+<p>有了这套理论，我们回过头来看原问题。</p>
+<p>考虑分治，计算越过 <span class="math inline">\(mid\)</span> 的区间的贡献。我们发现对于一个 <span class="math inline">\([i,mid]\)</span> 的圆，所有 <span class="math inline">\([mid+1,j]\)</span> 的圆能分成三个区间，最前面的区间满足 <span class="math inline">\([i,mid]\)</span> 的圆包含 <span class="math inline">\([mid+1,j]\)</span> 的圆，接下来一段是有交/无交，再接下来一段是把 <span class="math inline">\([i,mid]\)</span> 包含。这两个断点设为 <span class="math inline">\(r1,r2\)</span>，容易发现当 <span class="math inline">\(i\)</span> 从 <span class="math inline">\(mid\)</span> 向 <span class="math inline">\(l\)</span> 枚举时一定单调不左移，可以双指针算。第一种贡献很好计算，就是 <span class="math inline">\((r1-mid) \times [i,mid].r\)</span> ，第二种贡献能拆成类似一个点和一段区间的点的距离和加上一坨好算的项，容易用全局平衡二叉树维护，第三种贡献也非常好算。</p>
+<p>总复杂度 <span class="math inline">\(O(n\log^2 n)\)</span>，全局平衡二叉树部分换成树剖+bit的话就是 <span class="math inline">\(\log^3\)</span> 的。</p>
+<h2 id="cf1588f-jumping-through-the-array"><a target="_blank" rel="noopener" href="https://codeforces.com/problemset/problem/1588/F">CF1588F Jumping Through the Array</a></h2>
+<p>你有个长度为 <span class="math inline">\(n\)</span> 的数组 <span class="math inline">\(a\)</span> 和一个长度为 <span class="math inline">\(n\)</span> 的排列 <span class="math inline">\(p\)</span>，对于每一个 <span class="math inline">\(i\)</span> 有一有向边 <span class="math inline">\((i,p_i)\)</span>。</p>
+<p>有如下三种操作：</p>
+<ul>
+<li><p><code>1 l r</code> 询问 <span class="math inline">\(\sum_{i=l}^r a_i\)</span>。</p></li>
+<li><p><code>2 v x</code> 将所有 <span class="math inline">\(v\)</span> 能到达的节点所对应编号的值加 <span class="math inline">\(x\)</span>。</p></li>
+<li><p><code>3 x y</code> 交换 <span class="math inline">\(p_x\)</span> 与 <span class="math inline">\(p_y\)</span>。</p></li>
+</ul>
+<p>对于每个 <span class="math inline">\(1\)</span> 操作输出结果。</p>
+<p><span class="math inline">\(n\leq 10^5\)</span>。</p>
+<hr />
+<p>可能是我做过最简单的 3500？</p>
+<p>按操作 <span class="math inline">\(B\)</span> 个分块，断环成区间，容易发现 <code>2</code> 和 <code>3</code> 操作影响到的区间只有 <span class="math inline">\(O(B)\)</span> 个，直接暴力做就没了。</p>
+<p>复杂度 <span class="math inline">\(O(n\sqrt n )\)</span> 。</p>
+<h2 id="cf1208h-red-blue-tree"><a href="%5BProblem%20-%201208H%20-%20Codeforces%5D(https://codeforces.com/problemset/problem/1208/H)">CF1208H Red Blue Tree</a></h2>
+<p>有一棵 <span class="math inline">\(n\)</span> 个节点的树，然后给定一个数 <span class="math inline">\(k\)</span>。</p>
+<p>每个叶子结点都有一个固定的颜色（红或蓝），</p>
+<p>其中红色用 <span class="math inline">\(0\)</span> 表示，蓝色用 <span class="math inline">\(1\)</span> 表示。</p>
+<p>对于每个非叶子节点 <span class="math inline">\(u\)</span> 的儿子 <span class="math inline">\(v\)</span>，如果 <span class="math inline">\(\sum (color_v=blue)-\sum (color_v=red)\ge k\)</span></p>
+<p>那么这个节点就是蓝色的，否则就是红色的。</p>
+<p>现在要求支持三种操作：</p>
+<p><code>1 v</code> 输出 <span class="math inline">\(v\)</span> 节点的颜色。</p>
+<p><code>2 v c</code> 把 <span class="math inline">\(v\)</span> 节点的颜色改为 <span class="math inline">\(c\)</span>。</p>
+<p><code>3 h</code> 把当前 <span class="math inline">\(k\)</span> 的值改成 <span class="math inline">\(h\)</span>。</p>
+<p><span class="math inline">\(1\leq n,q\leq 10^5\)</span>。</p>
+<hr />
+<p>标算是按操作分块，但是有一种牛一圈的做法。</p>
+<p>容易发现随着 <span class="math inline">\(k\)</span> 增大，红点数量在增多，也就是说对于每个点存在一个 <span class="math inline">\(k_i\)</span> 使得 <span class="math inline">\(k\leq k_i\)</span> 时该节点是蓝色。对于每个点维护这个确界即可。</p>
+<p>我们考虑类似动态 dp 的转移，设 <span class="math inline">\(f_{u,0/1}\)</span> 表示重儿子是 <code>R/B</code> 时只考虑轻儿子的确界，这个可以考虑把轻儿子维护一个平衡树做。然后考虑修改时发现这个确界的修改量大概是 <span class="math inline">\(O(1)\)</span> 的（不太会证，实际跑出来的结果确实像是 <span class="math inline">\(O(1)\)</span>）。</p>
+<p><span class="math inline">\(f\)</span> 的合并我目前只能感性理解，现在还不是特别懂。</p>
+
+        </div>
+        
+        
+        
+        <div class="article-tags">
+            <ul class="tags-list cl">
+                
+                <li><a href="/tags/小记/"><i class="fa fa-tag"></i>小记</a></li>
+                
+            </ul>
+        </div>
+        
+        <div class="article-pagination cl">
+        
+            <div class="pagination-prev">
+                <a href="/2022/01/25/YACS2022JAN%20%E9%A2%98%E8%A7%A3/">YACS2022 Jan 题解</a>
+            </div>
+        
+        
+            <div class="pagination-next">
+                <a href="/2022/01/04/%E9%A2%98%E8%A7%A3%20AT2536%20%E5%88%87%E7%AC%A6%E3%81%AE%E6%89%8B%E9%85%8D%20(Arranging%20Tickets)/">题解 AT2536 切符の手配 (Arranging Tickets)</a>
+            </div>
+        
+        </div>
+
+        
+    </div>
+</article>
+
+    </section>
+    
+<section class="tool-area">
+
+    <div class="toolbar">
+        
+
+        
+        <div class="widget-post widget" style="order: 1 ">
+            <h2 class="widget-title"><i class="fa fa-file-text"></i> 近期文章</h2>
+            <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2022/01/25/YACS2022JAN%20%E9%A2%98%E8%A7%A3/">YACS2022 Jan 题解</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/18/CF%203000+%20%E5%8D%B7%E9%A2%98%E8%AE%B0%E5%BD%95/">CF 3000+ 好题卷题记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/04/%E9%A2%98%E8%A7%A3%20AT2536%20%E5%88%87%E7%AC%A6%E3%81%AE%E6%89%8B%E9%85%8D%20(Arranging%20Tickets)/">题解 AT2536 切符の手配 (Arranging Tickets)</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/23/Steiner%20%E4%B8%89%E5%85%83%E7%B3%BB%E5%AD%A6%E4%B9%A0%E5%B0%8F%E8%AE%B0/">Steiner 三元系学习小记</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/14/%E9%A2%98%E8%A7%A3%20P7975%20%E3%80%8CStoi2033%E3%80%8D%E5%88%86%E8%A3%82/">题解 P7975 「Stoi2033」分裂</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/08/%E9%A2%98%E8%A7%A3%20CF886E%20Maximum%20Element/">题解 CF886E Maximum Element</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/23/%E9%A2%98%E8%A7%A3%20CF1612F%20Armor%20and%20Weapons/">题解 CF1612F Armor and Weapons</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/21/%E6%A2%A6%E7%A2%8E%20NOIP2021/">梦碎 NOIP2021</a></li></ul>
+        </div>
+        
+
+        
+        <div class="widget-tags widget" style="order: 2 ">
+            <h2 class="widget-title"><i class="fa fa-tags"></i> 标签</h2>
+            <a href="/tags/%E5%B0%8F%E8%AE%B0/" style="font-size: 10px;">小记</a> <a href="/tags/%E6%B8%B8%E8%AE%B0/" style="font-size: 15px;">游记</a> <a href="/tags/%E9%A2%98%E8%A7%A3/" style="font-size: 20px;">题解</a>
+        </div>
+        
+
+        
+        <div class="widget-categories widget" style="order: 3 ">
+            <h2 class="widget-title"><i class="fa fa-folder-open"></i> 分类</h2>
+            
+        </div>
+        
+
+    </div>
+</section>
+</div>
+
+    
+        <footer class="footer">
+	<p class="footer-intro">
+		
+		@2022 LYC_music的小窝.
+	</p>
+	<p class="footer-intro">
+			Powered By <a href="https://hexo.io/zh-cn/" target="_blank">hexo</a>
+			theme <a href="https://github.com/iengu/hexo-theme-mokusei" target="_blank">mokusei</a> by <a href="https://www.iengu.com" target="blank">iengu</a>
+	</p>
+</footer>
+
+
+
+
+        <div class="extend-tools" id="extend-tools" style="display: none;">
+    <ul>
+        <li class="tools-returnTop" title="返回顶部"><i class="fa fa-angle-double-up"></i></li>
+    </ul>
+</div>
+
+	</div>
+
+	
+<script src="/js/org/jquery.min.js"></script>
+
+    
+<script src="/js/extend.js"></script>
+
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>  
+</body>
+</html>

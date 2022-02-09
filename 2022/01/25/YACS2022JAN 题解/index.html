@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="zh-CN" >
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<title>YACS2022 Jan 题解 - LYC_music的小窝</title>
+    <link rel="alternate" href="" type="application/atom+xml"/>
+	<link rel="shortcut icon" href=""/>
+	
+<link rel="stylesheet" href="/css/style.css">
+
+	
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+	
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body>
+	<div class="main-con">
+
+        <div class="nav cl">
+    <ul class="cl nav-list">
+        
+            <li>
+                
+                    <a href="/" class="">
+                        <i class="fa fa-home"></i> 
+                        <span>主页</span>
+                    </a>
+                
+            </li>
+        
+            <li>
+                
+                    <a href="/archives/" class="">
+                        <i class=" fa-"></i> 
+                        <span>归档</span>
+                    </a>
+                
+            </li>
+        
+            <li>
+                
+                    
+                    <a href="javascript:void(0)" class="">
+                    
+                        <i class=" fa-"></i> 
+                        <span>关于</span>
+                        <span class="drop-flag fa fa-angle-down"></span>
+                    </a>
+                    <dl>
+                        
+                            <li>
+                                <a href="/about" class="">
+                                    <i class=" fa-"></i>
+                                    <span>关于本站</span>
+                                </a>
+                            </li>
+                        
+                    </dl>
+                
+            </li>
+        
+    </ul>
+    <ul class="cl nav-tool">
+        
+            <li>
+                <a href="/github">
+                    <i class="fa fa-github"></i>
+                </a>
+            </li>
+        
+            <li>
+                <a href="/mail">
+                    <i class="fa fa-envelope"></i>
+                </a>
+            </li>
+        
+            <li>
+                <a href="/twitter">
+                    <i class="fa fa-twitter"></i>
+                </a>
+            </li>
+        
+        
+        <li>
+            <a href="javascript:void(0)" class="nav-search-btn">
+                <i class="fa fa-search"></i>
+            </a>
+        </li>
+        
+    </ul>
+    <form action="//google.com/search" method="get" accept-charset="UTF-8" class="nav-search"><input type="search" name="q" class="nav-search-input" placeholder="search..."><input type="hidden" name="sitesearch" value="https://lyc-music.github.io"></form>
+</div>
+
+        <header class="top" id="fallEle" style="background-image: url(/imgs/bella.jpg)">
+    <i class="fa fa-bars" id="media-toggle" style="display: none"></i>
+    <div class="top-info cl fadeToBottom">
+        <h2 class="site-name"><a href="/">LYC_music的小窝</a> <small id="type-data"></small></h2>
+    </div>
+</header>
+
+        <div class="con-wrap fadeToTop">
+    
+    <section class="article-area">
+    
+        <article class="article">
+    <div class="article-wrap">
+        
+            <h2 class="article-title cl">
+                YACS2022 Jan 题解
+            </h2>
+        
+
+        <ul class="article-extra" style="margin-bottom: 20px">
+            
+            <li class="article-time">
+                2022-01-25
+            </li>
+            
+
+            
+                
+            
+
+
+        </ul>
+        <div class="article-description">
+            
+            <h3 id="part-0">Part 0</h3>
+<p>初测结果：</p>
+<p>甲：<span class="math inline">\(100+100+100=300\)</span></p>
+<p>乙：<span class="math inline">\(100+100+100+100=400\)</span></p>
+<p>丙：<span class="math inline">\(100+100+100+100+100=500\)</span></p>
+<p>（给我打成 ACM 了属于是）</p>
+<p>（反转了，甲组 C 题要危）</p>
+<span id="more"></span>
+<h3 id="part-1-丙">Part 1 丙</h3>
+<p>skip</p>
+<h3 id="part-2-乙">Part 2 乙</h3>
+<h4 id="a">A</h4>
+<p>本质不同子序列原题。</p>
+<h4 id="b">B</h4>
+<p><span class="math inline">\(n\)</span> 个人去一个景点，一般情况下每个人都需要买票，但如果一个人的体重小于等于另一个人的体重的一半，那么这两个人可以合买一张票。已知 <span class="math inline">\(n\)</span> 个人的体重，他们至少需要买多少张票。</p>
+<p><span class="math inline">\(1\leq n\leq 10^6\)</span>。</p>
+<hr />
+<p>场上思考时间最多的一题。</p>
+<p><del>容易</del> 发现一定存在一种匹配方案使得其跨过序列中最中间的那个数，也就是说对于一个匹配 <span class="math inline">\((i,j)\)</span> 使得 <span class="math inline">\(1\leq i\leq mid\)</span> 且 <span class="math inline">\(mid+1\leq i\leq n\)</span> 。</p>
+<p>然后就做完了。</p>
+<h4 id="c-d">C D</h4>
+<p>skip，裸题。</p>
+<h3 id="part-3-甲">Part 3 甲</h3>
+<h4 id="a-1">A</h4>
+<p>有 <span class="math inline">\(n\)</span> 个孩子，从 <span class="math inline">\(1\)</span> 到 <span class="math inline">\(n\)</span> 编号，编号为 <span class="math inline">\(i\)</span> 的孩子握着 <span class="math inline">\(a_i\)</span> 个苹果。又有 <span class="math inline">\(n\)</span> 个筐，从 <span class="math inline">\(1\)</span> 到 <span class="math inline">\(n\)</span> 编号，编号为 <span class="math inline">\(i\)</span> 的筐可以最多装下 <span class="math inline">\(b_i\)</span> 个苹果。</p>
+<p>对于 <span class="math inline">\(1\)</span> 到 <span class="math inline">\(n\)</span> 中任何的正整数 <span class="math inline">\(i\)</span>，编号为 <span class="math inline">\(i\)</span> 的孩子可以把手上的苹果按任意数量分配到编号为 <span class="math inline">\(i\)</span> 和编号为 <span class="math inline">\((i \bmod n + 1)\)</span> 的筐里，若不把苹果放在筐里，小朋友也可以把苹果留在手上。</p>
+<p>请设计一个方案，使得装到筐里的苹果总数达到最大。</p>
+<p><span class="math inline">\(3\leq n\leq 10^6\)</span> 。</p>
+<hr />
+<p>考虑设计一个网络流模型，源点连向 <span class="math inline">\(n\)</span> 个孩子，第 <span class="math inline">\(i\)</span> 个孩子容量为 <span class="math inline">\(a_i\)</span> 的边。</p>
+<p>再从第 <span class="math inline">\(i\)</span> 个孩子向第 <span class="math inline">\(i\)</span> 个筐和第 <span class="math inline">\((i\bmod n)+1\)</span> 个筐连一条容量为 <span class="math inline">\(\text{inf}\)</span> 的边。最后第 <span class="math inline">\(i\)</span> 个筐向汇点流 <span class="math inline">\(b_i\)</span> 的容量。</p>
+<p>容易发现上述模型的最大流即为答案。</p>
+<p>考虑最大流转最小割，容易发现孩子和筐的边是不可能被割的，我们枚举第 <span class="math inline">\(1\)</span> 个筐的出边是否被割，设计动态规划状态为 <span class="math inline">\(f_i\)</span> 表示第 <span class="math inline">\((i\bmod n)+1\)</span> 个筐的出边是否被割，转移是简单的。</p>
+<p>复杂度 <span class="math inline">\(O(n)\)</span>。</p>
+<h4 id="b-1">B</h4>
+<p>小爱是一位快乐的粉刷匠，她现在需要粉刷一块包含 <span class="math inline">\(n\times m\)</span> 小格子的墙面， 每个格子一开始都是白色的。 小爱可以进行以下两种操作:</p>
+<p>把某一行全部染成红色 <span class="math inline">\(R\)</span> 或者黑色 <span class="math inline">\(B\)</span> 。 把某一列全部染成红色 <span class="math inline">\(R\)</span> 或者黑色 <span class="math inline">\(B\)</span>。</p>
+<p>每次涂到一个格子时，无论这个格子之前是否被染过色，都会被覆盖成当前的颜色。 经过一些操作后，小爱制作完成了一个只有红色与黑色的染色图，她非常得意地拿给小艾展示。小艾并不关心这幅图的美观度，她只想知道这幅图最少几步就能得到，但她不能一下子看出，所以来寻求你的帮助。</p>
+<p>给出一幅染色图， 输出最少需要几步可以画成这幅图。 如果小爱在欺骗小艾，这幅图无法通过以上操作获得，则输出 <span class="math inline">\(-1\)</span>。</p>
+<p><span class="math inline">\(1\leq n,m\leq 3000\)</span>。</p>
+<hr />
+<p>好题。好题。好题。</p>
+<p><strong>Lemma 1</strong>：设 <span class="math inline">\(x\)</span> 为没有涂颜色的行，<span class="math inline">\(y\)</span> 没有涂颜色的列，则 <span class="math inline">\(x\)</span> 和 <span class="math inline">\(y\)</span> 不可能同时 <span class="math inline">\(&gt;0\)</span>。</p>
+<p>证明：如果存在 <span class="math inline">\(x\)</span> 和 <span class="math inline">\(y\)</span> 同时 <span class="math inline">\(&gt;0\)</span> 那么必有至少一个点不被染色。</p>
+<p>接下来我们枚举一个行，假设它没被涂色，那么没被涂色的行一定与它状态相同。</p>
+<p>对于其他行，我们去枚举每一列，容易发现可以得到当前这一行图的颜色是什么，并且会得到一些关于列的染色顺序的偏序关系，对于偏序关系连边判断是否成环，不成环则说明方案合法。复杂度 <span class="math inline">\(O(n^3)\)</span>。</p>
+<p><strong>Lemma 2</strong>： 一个矩阵无解，当且仅当存在 <span class="math inline">\(i,j,x,y(i\leq x,j\leq y)\)</span> 满足 <span class="math inline">\(a_{i,j}=a_{x,y},a_{i,y}=a_{x,j},a_{i,j} \not=a_{i,y}\)</span>。</p>
+<p>证明可以讨论上述算法的偏序关系的成环，容易发现如果成环必定会有长度为 <span class="math inline">\(2\)</span> 的环，从而得到上述结论。</p>
+<p><strong>Lemma 3</strong>：对于一个有解的矩阵。枚举一个状态，不涂与之状态相同的行，依然有解。</p>
+<p>由 Lemma 2 得证。</p>
+<p>那么就很简单了。先判断是否有解，然后得出状态相同的行的行数最大值或状态相同的列的列数最大值 <span class="math inline">\(x\)</span>，答案即为 <span class="math inline">\(n+m-x\)</span>。</p>
+<p>时间复杂度 <span class="math inline">\(O(nm)\)</span>。</p>
+<p>值得注意的是，判断有解这部分拓扑排序判断常数很大，只能用暴力消行消列的方法。</p>
+<h4 id="c">C</h4>
+<p>对于一个包含 <span class="math inline">\(n\)</span> 个节点的无向图，每个节点有一个权值 <span class="math inline">\(w_i\)</span>。 若无向图存在一个节点子集，当且仅当该子集中任意两个不同的节点都是相邻的，即为一个团。 一个团的权重是指该子集中所包含的节点权值的总和，问该图中第 <span class="math inline">\(k\)</span> 小的团的权重为多少。 需要注意的是，空集合也认为是一个团。</p>
+<p><span class="math inline">\(1\leq n \leq 100,1\leq k\leq 10^9\)</span>。</p>
+<hr />
+<p>赛场上写了空间复杂度和时间复杂度都为 <span class="math inline">\(O(nk)\)</span> 的大常数做法，估计药丸。</p>
+<p>考虑一个很 naive 的做法，每次维护一个堆，堆中存所有的团，每次取出权值最小的一个，从其最高位开始扩展团塞进去，因为 <span class="math inline">\(n\leq 100\)</span> 所以可以用一个 __int128 来存一个团的状态。复杂度 <span class="math inline">\(O(nk\log nk)\)</span>，很危险。</p>
+<p>然后容易发现我们可以维护 <span class="math inline">\(n\)</span> 个队列，第 <span class="math inline">\(i\)</span> 个队列表示最高位为 <span class="math inline">\(i\)</span> 的团的队列。这样子做每个队列都是单调的，每次从 <span class="math inline">\(n\)</span> 个队列中求最小值就行了，时间复杂度 <span class="math inline">\(O(nk)\)</span> 对了，但是很遗憾它的空间复杂度也是 <span class="math inline">\(O(nk)\)</span>。</p>
+<p>考虑对第一个做法优化，我们发现对于一个团状态 <span class="math inline">\(x\)</span> 能扩展出的团 <span class="math inline">\(x \cup w_1\)</span> ，<span class="math inline">\(x \cup w_2\)</span> ……，我们考虑对于每个点按权值大小排序，那么在 <span class="math inline">\(x\cup w_1\)</span> 还在堆内的时候，<span class="math inline">\(x\cup w_2\)</span> 没有必要加入堆内，所以我们在扩展时，只扩展第一个能扩展的，剩下的记个 <code>nxt</code> 等第一个扩展的弹掉了再加入。容易发现每次最多加两种状态，时间复杂度 <span class="math inline">\(O(k\log k+nk)\)</span>，空间复杂度 <span class="math inline">\(O(k)\)</span>，常数应该很小。</p>
+<p>值得注意的是，这个做法本质上就是第一个做法对于状态扩展树的三度化。</p>
+<h3 id="part-4-总结">Part 4 总结</h3>
+<p>这次甲组个人感觉题目质量很高啊（如果不是原题的话（反转了）），难度感觉偏省选？可惜这次打得不是很好。</p>
+<p>期待下次月赛/se。</p>
+<p>upd: 2021/1/23</p>
+<p><a href="%5BProblem%20-%201373F%20-%20Codeforces%5D(https://codeforces.com/problemset/problem/1373/F)">shit，原来 A 题是原题加强版。</a></p>
+<p>tzc 貌似在题解里给出了和我一样的做法/se。</p>
+<p>upd:</p>
+<p>反转了T3也是原的，某场牛客多校的题，而且看场上队伍好多写的都是 <span class="math inline">\(O(nk\log nk)\)</span> 的做法还过了，但也有几支队写的是后面的正解。</p>
+<p>T2暂时还没有找到原。</p>
+
+        </div>
+        
+        
+        
+        <div class="article-tags">
+            <ul class="tags-list cl">
+                
+                <li><a href="/tags/题解/"><i class="fa fa-tag"></i>题解</a></li>
+                
+            </ul>
+        </div>
+        
+        <div class="article-pagination cl">
+        
+        
+            <div class="pagination-next">
+                <a href="/2022/01/18/CF%203000+%20%E5%8D%B7%E9%A2%98%E8%AE%B0%E5%BD%95/">CF 3000+ 好题卷题记录</a>
+            </div>
+        
+        </div>
+
+        
+    </div>
+</article>
+
+    </section>
+    
+<section class="tool-area">
+
+    <div class="toolbar">
+        
+
+        
+        <div class="widget-post widget" style="order: 1 ">
+            <h2 class="widget-title"><i class="fa fa-file-text"></i> 近期文章</h2>
+            <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2022/01/25/YACS2022JAN%20%E9%A2%98%E8%A7%A3/">YACS2022 Jan 题解</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/18/CF%203000+%20%E5%8D%B7%E9%A2%98%E8%AE%B0%E5%BD%95/">CF 3000+ 好题卷题记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/04/%E9%A2%98%E8%A7%A3%20AT2536%20%E5%88%87%E7%AC%A6%E3%81%AE%E6%89%8B%E9%85%8D%20(Arranging%20Tickets)/">题解 AT2536 切符の手配 (Arranging Tickets)</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/23/Steiner%20%E4%B8%89%E5%85%83%E7%B3%BB%E5%AD%A6%E4%B9%A0%E5%B0%8F%E8%AE%B0/">Steiner 三元系学习小记</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/14/%E9%A2%98%E8%A7%A3%20P7975%20%E3%80%8CStoi2033%E3%80%8D%E5%88%86%E8%A3%82/">题解 P7975 「Stoi2033」分裂</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/08/%E9%A2%98%E8%A7%A3%20CF886E%20Maximum%20Element/">题解 CF886E Maximum Element</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/23/%E9%A2%98%E8%A7%A3%20CF1612F%20Armor%20and%20Weapons/">题解 CF1612F Armor and Weapons</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/21/%E6%A2%A6%E7%A2%8E%20NOIP2021/">梦碎 NOIP2021</a></li></ul>
+        </div>
+        
+
+        
+        <div class="widget-tags widget" style="order: 2 ">
+            <h2 class="widget-title"><i class="fa fa-tags"></i> 标签</h2>
+            <a href="/tags/%E5%B0%8F%E8%AE%B0/" style="font-size: 10px;">小记</a> <a href="/tags/%E6%B8%B8%E8%AE%B0/" style="font-size: 15px;">游记</a> <a href="/tags/%E9%A2%98%E8%A7%A3/" style="font-size: 20px;">题解</a>
+        </div>
+        
+
+        
+        <div class="widget-categories widget" style="order: 3 ">
+            <h2 class="widget-title"><i class="fa fa-folder-open"></i> 分类</h2>
+            
+        </div>
+        
+
+    </div>
+</section>
+</div>
+
+    
+        <footer class="footer">
+	<p class="footer-intro">
+		
+		@2022 LYC_music的小窝.
+	</p>
+	<p class="footer-intro">
+			Powered By <a href="https://hexo.io/zh-cn/" target="_blank">hexo</a>
+			theme <a href="https://github.com/iengu/hexo-theme-mokusei" target="_blank">mokusei</a> by <a href="https://www.iengu.com" target="blank">iengu</a>
+	</p>
+</footer>
+
+
+
+
+        <div class="extend-tools" id="extend-tools" style="display: none;">
+    <ul>
+        <li class="tools-returnTop" title="返回顶部"><i class="fa fa-angle-double-up"></i></li>
+    </ul>
+</div>
+
+	</div>
+
+	
+<script src="/js/org/jquery.min.js"></script>
+
+    
+<script src="/js/extend.js"></script>
+
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>  
+</body>
+</html>

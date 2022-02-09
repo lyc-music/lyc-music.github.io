@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="zh-CN" >
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<title>题解 CF1332F Independent Set - LYC_music的小窝</title>
+    <link rel="alternate" href="" type="application/atom+xml"/>
+	<link rel="shortcut icon" href=""/>
+	
+<link rel="stylesheet" href="/css/style.css">
+
+	
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+	
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body>
+	<div class="main-con">
+
+        <div class="nav cl">
+    <ul class="cl nav-list">
+        
+            <li>
+                
+                    <a href="/" class="">
+                        <i class="fa fa-home"></i> 
+                        <span>主页</span>
+                    </a>
+                
+            </li>
+        
+            <li>
+                
+                    <a href="/archives/" class="">
+                        <i class=" fa-"></i> 
+                        <span>归档</span>
+                    </a>
+                
+            </li>
+        
+            <li>
+                
+                    
+                    <a href="javascript:void(0)" class="">
+                    
+                        <i class=" fa-"></i> 
+                        <span>关于</span>
+                        <span class="drop-flag fa fa-angle-down"></span>
+                    </a>
+                    <dl>
+                        
+                            <li>
+                                <a href="/about" class="">
+                                    <i class=" fa-"></i>
+                                    <span>关于本站</span>
+                                </a>
+                            </li>
+                        
+                    </dl>
+                
+            </li>
+        
+    </ul>
+    <ul class="cl nav-tool">
+        
+            <li>
+                <a href="/github">
+                    <i class="fa fa-github"></i>
+                </a>
+            </li>
+        
+            <li>
+                <a href="/mail">
+                    <i class="fa fa-envelope"></i>
+                </a>
+            </li>
+        
+            <li>
+                <a href="/twitter">
+                    <i class="fa fa-twitter"></i>
+                </a>
+            </li>
+        
+        
+        <li>
+            <a href="javascript:void(0)" class="nav-search-btn">
+                <i class="fa fa-search"></i>
+            </a>
+        </li>
+        
+    </ul>
+    <form action="//google.com/search" method="get" accept-charset="UTF-8" class="nav-search"><input type="search" name="q" class="nav-search-input" placeholder="search..."><input type="hidden" name="sitesearch" value="https://lyc-music.github.io"></form>
+</div>
+
+        <header class="top" id="fallEle" style="background-image: url(/imgs/bella.jpg)">
+    <i class="fa fa-bars" id="media-toggle" style="display: none"></i>
+    <div class="top-info cl fadeToBottom">
+        <h2 class="site-name"><a href="/">LYC_music的小窝</a> <small id="type-data"></small></h2>
+    </div>
+</header>
+
+        <div class="con-wrap fadeToTop">
+    
+    <section class="article-area">
+    
+        <article class="article">
+    <div class="article-wrap">
+        
+            <h2 class="article-title cl">
+                题解 CF1332F Independent Set
+            </h2>
+        
+
+        <ul class="article-extra" style="margin-bottom: 20px">
+            
+            <li class="article-time">
+                2021-09-28
+            </li>
+            
+
+            
+                
+            
+
+
+        </ul>
+        <div class="article-description">
+            
+            <p>简单树形 dp。 设状态 <span class="math inline">\(dp_{i,0/1/2}\)</span> 分别表示：</p>
+<p><span class="math inline">\(dp_{i,0}\)</span> 表示第 <span class="math inline">\(i\)</span> 个点选入了导出子图中但不选入独立集时 <span class="math inline">\(i\)</span> 子树内的方案数</p>
+<p><span class="math inline">\(dp_{i,1}\)</span> 表示第 <span class="math inline">\(i\)</span> 个点选入了导出子图中并选入独立集时 <span class="math inline">\(i\)</span> 子树内的方案数。</p>
+<p><span class="math inline">\(dp_{i,2}\)</span> 表示第 <span class="math inline">\(i\)</span> 个点是否选入导出子图需要其父亲连向其的那条边确定时子树内的方案数。<span id="more"></span></p>
+<p>对于 <span class="math inline">\(dp_{i,0}\)</span> ，当有一个新子树 <span class="math inline">\(u\)</span> 加入时，更新过程是</p>
+<p><span class="math display">\[dp_{i,0}=dp_{i,0}\times (dp_{u,0}+dp_{u,1}+dp_{u,2})+dp_{i,0}\times(dp_{u,0}+dp_{u,1}+dp_{u,2}\times 2)\]</span></p>
+<p>前面一部分是 <span class="math inline">\(i\)</span> 不与 <span class="math inline">\(u\)</span> 连边的情况，后面反之。</p>
+<p>对于 <span class="math inline">\(dp_{i,1}\)</span> ，当有一个新子树 <span class="math inline">\(u\)</span> 加入时，更新过程是</p>
+<p><span class="math display">\[dp_{i,1}=dp_{i,1}\times (dp_{u,0}+dp_{u,1}+dp_{u,2})+dp_{i,1}\times(dp_{u,0}+dp_{u,2})\]</span></p>
+<p>前面一部分是 <span class="math inline">\(i\)</span> 不与 <span class="math inline">\(u\)</span> 连边的情况，后面反之。</p>
+<p>对于 <span class="math inline">\(dp_{i,2}\)</span> ，当有一个新子树 <span class="math inline">\(u\)</span> 加入时，更新过程是</p>
+<p><span class="math display">\[dp_{i,2}=dp_{i,2}\times (dp_{u,0}+dp_{u,1}+dp_{u,2})\]</span></p>
+<p>注意这里算 <span class="math inline">\(dp_{i,0}\)</span> 和 <span class="math inline">\(dp_{i,1}\)</span> 的时候也把 <span class="math inline">\(dp_{i,2}\)</span> 的情况包括进去了，所以 <span class="math inline">\(dp_{i,0}-=dp_{i,2},dp_{i,1}-=dp_{i,2}\)</span>。</p>
+<p>最后答案为 <span class="math inline">\(dp_{1,0}+dp_{1,1}+dp_{1,2}-1\)</span>，要减去每个点都不选入导出子图的情况。 <pre><code class="hljs plaintext">//QwQcOrZ yyds!!!
+#include&lt;bits/stdc++.h&gt;
+#define ll long long
+#define foor(i,a,b) for (int i=(a);i&lt;=(b);i++)
+#define door(i,a,b) for (int i=(a);i&gt;=(b);i--)
+#define go(i,x) for (int i=head[x];i;i=e[i].nx)
+#define IOS ios::sync_with_stdio(false)
+#define mp make_pair
+#define pb push_back
+#define pa pair &lt; int,int &gt;
+#define fi first
+#define se second
+#define re register
+#define be begin()
+#define en end()
+#define sqr(x) ((x)*(x))
+#define ret return puts(&quot;-1&quot;),0;
+#define put putchar(&#x27;\n&#x27;)
+#define inf 1000000005
+#define mod 998244353
+#define int ll
+#define N 300005
+using namespace std;
+inline char gc()&#123;static char buf[1000000],*p1=buf,*p2=buf;return p1==p2&amp;&amp;(p2=(p1=buf)+fread(buf,1,1000000,stdin),p1==p2)?EOF:*p1++;&#125;
+#define gc getchar
+inline ll read()&#123;char c=gc();ll su=0,f=1;for (;c&lt;&#x27;0&#x27;||c&gt;&#x27;9&#x27;;c=gc()) if (c==&#x27;-&#x27;) f=-1;for (;c&gt;=&#x27;0&#x27;&amp;&amp;c&lt;=&#x27;9&#x27;;c=gc()) su=su*10+c-&#x27;0&#x27;;return su*f;&#125;
+inline void write(ll x)&#123;if (x&lt;0)&#123;putchar(&#x27;-&#x27;);write(-x);return;&#125;if (x&gt;=10) write(x/10);putchar(x%10+&#x27;0&#x27;);&#125;
+inline void writesp(ll x)&#123;write(x),putchar(&#x27; &#x27;);&#125;
+inline void writeln(ll x)&#123;write(x);putchar(&#x27;\n&#x27;);&#125;
+int n,dp[N][5];
+int ans;
+vector&lt;int&gt;G[N];
+void ad(int x,int y)
+&#123;
+	G[x].push_back(y);
+&#125;
+void dfs(int k,int fa)
+&#123;
+	dp[k][0]=1;
+	dp[k][1]=1;
+	dp[k][2]=1;
+	for (auto u:G[k])
+	&#123;
+		if (u==fa) continue;
+		dfs(u,k);
+		dp[k][0]=(dp[k][0]*(dp[u][0]+dp[u][1]+dp[u][2])%mod+dp[k][0]*(dp[u][0]+dp[u][1]+dp[u][2]*2)%mod)%mod;
+		dp[k][1]=(dp[k][1]*(dp[u][0]+dp[u][1]+dp[u][2])%mod+dp[k][1]*(dp[u][0]+dp[u][2])%mod)%mod;
+		dp[k][2]=(dp[k][2]*(dp[u][0]+dp[u][1]+dp[u][2])%mod);
+	&#125;
+	dp[k][0]=(dp[k][0]-dp[k][2]+mod)%mod;
+	dp[k][1]=(dp[k][1]-dp[k][2]+mod)%mod;
+&#125;
+signed main()
+&#123;
+	n=read();
+	for (int i=1;i&lt;n;i++)
+	&#123;
+		int u=read(),v=read();
+		ad(u,v);
+		ad(v,u);
+	&#125;
+	dfs(1,0);
+	writeln(((dp[1][0]+dp[1][1]+dp[1][2])%mod-1+mod)%mod);
+&#125;
+/*
+
+*/</code></pre></p>
+
+        </div>
+        
+        
+        
+        <div class="article-tags">
+            <ul class="tags-list cl">
+                
+                <li><a href="/tags/题解/"><i class="fa fa-tag"></i>题解</a></li>
+                
+            </ul>
+        </div>
+        
+        <div class="article-pagination cl">
+        
+            <div class="pagination-prev">
+                <a href="/2021/09/28/%E9%A2%98%E8%A7%A3%20AT2346%20%5BARC070B%5D%20No%20Need/">题解 AT2346 [ARC070B] No Need</a>
+            </div>
+        
+        
+            <div class="pagination-next">
+                <a href="/2021/09/24/%E9%A2%98%E8%A7%A3%20CF1574D%20The%20Strongest%20Build/">题解 CF1574D The Strongest Build</a>
+            </div>
+        
+        </div>
+
+        
+    </div>
+</article>
+
+    </section>
+    
+<section class="tool-area">
+
+    <div class="toolbar">
+        
+
+        
+        <div class="widget-post widget" style="order: 1 ">
+            <h2 class="widget-title"><i class="fa fa-file-text"></i> 近期文章</h2>
+            <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2022/01/25/YACS2022JAN%20%E9%A2%98%E8%A7%A3/">YACS2022 Jan 题解</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/18/CF%203000+%20%E5%8D%B7%E9%A2%98%E8%AE%B0%E5%BD%95/">CF 3000+ 好题卷题记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/04/%E9%A2%98%E8%A7%A3%20AT2536%20%E5%88%87%E7%AC%A6%E3%81%AE%E6%89%8B%E9%85%8D%20(Arranging%20Tickets)/">题解 AT2536 切符の手配 (Arranging Tickets)</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/23/Steiner%20%E4%B8%89%E5%85%83%E7%B3%BB%E5%AD%A6%E4%B9%A0%E5%B0%8F%E8%AE%B0/">Steiner 三元系学习小记</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/14/%E9%A2%98%E8%A7%A3%20P7975%20%E3%80%8CStoi2033%E3%80%8D%E5%88%86%E8%A3%82/">题解 P7975 「Stoi2033」分裂</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/08/%E9%A2%98%E8%A7%A3%20CF886E%20Maximum%20Element/">题解 CF886E Maximum Element</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/23/%E9%A2%98%E8%A7%A3%20CF1612F%20Armor%20and%20Weapons/">题解 CF1612F Armor and Weapons</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/21/%E6%A2%A6%E7%A2%8E%20NOIP2021/">梦碎 NOIP2021</a></li></ul>
+        </div>
+        
+
+        
+        <div class="widget-tags widget" style="order: 2 ">
+            <h2 class="widget-title"><i class="fa fa-tags"></i> 标签</h2>
+            <a href="/tags/%E5%B0%8F%E8%AE%B0/" style="font-size: 10px;">小记</a> <a href="/tags/%E6%B8%B8%E8%AE%B0/" style="font-size: 15px;">游记</a> <a href="/tags/%E9%A2%98%E8%A7%A3/" style="font-size: 20px;">题解</a>
+        </div>
+        
+
+        
+        <div class="widget-categories widget" style="order: 3 ">
+            <h2 class="widget-title"><i class="fa fa-folder-open"></i> 分类</h2>
+            
+        </div>
+        
+
+    </div>
+</section>
+</div>
+
+    
+        <footer class="footer">
+	<p class="footer-intro">
+		
+		@2022 LYC_music的小窝.
+	</p>
+	<p class="footer-intro">
+			Powered By <a href="https://hexo.io/zh-cn/" target="_blank">hexo</a>
+			theme <a href="https://github.com/iengu/hexo-theme-mokusei" target="_blank">mokusei</a> by <a href="https://www.iengu.com" target="blank">iengu</a>
+	</p>
+</footer>
+
+
+
+
+        <div class="extend-tools" id="extend-tools" style="display: none;">
+    <ul>
+        <li class="tools-returnTop" title="返回顶部"><i class="fa fa-angle-double-up"></i></li>
+    </ul>
+</div>
+
+	</div>
+
+	
+<script src="/js/org/jquery.min.js"></script>
+
+    
+<script src="/js/extend.js"></script>
+
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>  
+</body>
+</html>

@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="zh-CN" >
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<title>Steiner 三元系学习小记 - LYC_music的小窝</title>
+    <link rel="alternate" href="" type="application/atom+xml"/>
+	<link rel="shortcut icon" href=""/>
+	
+<link rel="stylesheet" href="/css/style.css">
+
+	
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+	
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body>
+	<div class="main-con">
+
+        <div class="nav cl">
+    <ul class="cl nav-list">
+        
+            <li>
+                
+                    <a href="/" class="">
+                        <i class="fa fa-home"></i> 
+                        <span>主页</span>
+                    </a>
+                
+            </li>
+        
+            <li>
+                
+                    <a href="/archives/" class="">
+                        <i class=" fa-"></i> 
+                        <span>归档</span>
+                    </a>
+                
+            </li>
+        
+            <li>
+                
+                    
+                    <a href="javascript:void(0)" class="">
+                    
+                        <i class=" fa-"></i> 
+                        <span>关于</span>
+                        <span class="drop-flag fa fa-angle-down"></span>
+                    </a>
+                    <dl>
+                        
+                            <li>
+                                <a href="/about" class="">
+                                    <i class=" fa-"></i>
+                                    <span>关于本站</span>
+                                </a>
+                            </li>
+                        
+                    </dl>
+                
+            </li>
+        
+    </ul>
+    <ul class="cl nav-tool">
+        
+            <li>
+                <a href="/github">
+                    <i class="fa fa-github"></i>
+                </a>
+            </li>
+        
+            <li>
+                <a href="/mail">
+                    <i class="fa fa-envelope"></i>
+                </a>
+            </li>
+        
+            <li>
+                <a href="/twitter">
+                    <i class="fa fa-twitter"></i>
+                </a>
+            </li>
+        
+        
+        <li>
+            <a href="javascript:void(0)" class="nav-search-btn">
+                <i class="fa fa-search"></i>
+            </a>
+        </li>
+        
+    </ul>
+    <form action="//google.com/search" method="get" accept-charset="UTF-8" class="nav-search"><input type="search" name="q" class="nav-search-input" placeholder="search..."><input type="hidden" name="sitesearch" value="https://lyc-music.github.io"></form>
+</div>
+
+        <header class="top" id="fallEle" style="background-image: url(/imgs/bella.jpg)">
+    <i class="fa fa-bars" id="media-toggle" style="display: none"></i>
+    <div class="top-info cl fadeToBottom">
+        <h2 class="site-name"><a href="/">LYC_music的小窝</a> <small id="type-data"></small></h2>
+    </div>
+</header>
+
+        <div class="con-wrap fadeToTop">
+    
+    <section class="article-area">
+    
+        <article class="article">
+    <div class="article-wrap">
+        
+            <h2 class="article-title cl">
+                Steiner 三元系学习小记
+            </h2>
+        
+
+        <ul class="article-extra" style="margin-bottom: 20px">
+            
+            <li class="article-time">
+                2021-12-23
+            </li>
+            
+
+            
+                
+            
+
+
+        </ul>
+        <div class="article-description">
+            
+            <h3 id="mathrmpart-0-前言"><span class="math inline">\(\mathrm{Part\ 0}\)</span> 前言</h3>
+<p>学习这玩意是因为补题 IOI2022 集训队互测 Day5T2。</p>
+<p>题面是这样的：</p>
+<hr />
+<p>现有 <span class="math inline">\(k\)</span> 个人，你可以举办任意多次由三个人参加的聚会，现要求任意两个人都同时参加聚会恰好一次，试构造一组聚会方案。</p>
+<p>可以说明，在给定的范围内一定有解。</p>
+<p>一行一个正整数 <span class="math inline">\(k(1\le k \le 3000)\)</span>，保证 <span class="math inline">\(k \bmod 6\)</span> 为 <span class="math inline">\(1\)</span> 或 <span class="math inline">\(3\)</span>。</p>
+<hr />
+<p>vp 时只写了前面的 <span class="math inline">\(k=2^t-1,k=3^t\)</span> 十分就转头去冲 T3 了。补题时 wwc 的题解看起来实在让人太头大了，补题极其困难。</p>
+<p>学长找到了一份名字叫 sts 的课件，于是我点开来看，是一份英文课件，直到看完这份课件，我终于会了这道题。觉得这道题很有意思，于是写了这篇博文。</p>
+<p>本文的内容大部分来源于此英文课件，但由于我并不知道其具体出处，无法在此标注。</p>
+<span id="more"></span>
+<h3 id="mathrmpart-1-施泰纳三元系"><span class="math inline">\(\mathrm{Part\ 1}\)</span> 施泰纳三元系</h3>
+<p>一个 Steiner 三元系由一个集合 <span class="math inline">\(S\)</span> 和一个三元组集合 <span class="math inline">\(T\)</span> 组成。满足 <span class="math inline">\(S\)</span> 中每对元素都在 <span class="math inline">\(T\)</span> 中出现且出现次数为 <span class="math inline">\(1\)</span> 。</p>
+<p>比如 <span class="math inline">\(S=\{0,1,2\},T=\{(0,1,2)\}\)</span>；<span class="math inline">\(S=\{0,1,2,3,4,5,6\},T = \{(0,1,3), (1,2,4), (2,3,5), (3,4,6), (4,5,0), (5,6,1), (6,0,2)\}\)</span>。</p>
+<p>容易算出如果 <span class="math inline">\(|S|=v\)</span> 那么 <span class="math inline">\(|T|=\frac{v(v-1)}{6}\)</span>。</p>
+<p>关于它的一个结论是，<span class="math inline">\(T\)</span> 存在当且仅当 <span class="math inline">\(v\equiv1\ \text{or}\ 3\bmod6\)</span>。</p>
+<p>因为包含 <span class="math inline">\(x\)</span> 的三元组将 <span class="math inline">\((i,x)\)</span> 这些二元组两两配对，所以 <span class="math inline">\(v-1\)</span> 只能是偶数，那么 <span class="math inline">\(v\)</span> 只能是奇数。</p>
+<p>当 <span class="math inline">\(v=6n+5\)</span> 时，<span class="math inline">\(v(v-1)=(36n^2+54n+20)\bmod 6\not\equiv0\)</span>。所以 <span class="math inline">\(v\)</span> 不能为 <span class="math inline">\(6n+5\)</span>。</p>
+<p>当 <span class="math inline">\(v=6n+1\ \text{or}\ +3\)</span> 时易证 <span class="math inline">\(v(v-1)\bmod 6=0\)</span> 。而这个结论剩下的部分需要我们通过构造证明。</p>
+<h3 id="mathrmpart-2-拟群拉丁方阵"><span class="math inline">\(\mathrm{Part\ 2}\)</span> 拟群、拉丁方阵</h3>
+<p><strong>拉丁方阵</strong>是一个 <span class="math inline">\(n\times n\)</span> 的方阵。它满足每行每列 <span class="math inline">\(1\sim n\)</span> 每个数只出现一次。</p>
+<p>例如 <span class="math inline">\(n=3\)</span> 时的一种拉丁方阵为：</p>
+<pre><code class="hljs plaintext">123
+231
+312</code></pre>
+<p>求一个拉丁方阵非常容易，最常用的方法是对于每个数，随机选取方阵中一个空的格子，初始位置是 <span class="math inline">\((x,y)\)</span> 然后固定每次的移动是 <span class="math inline">\(delx=1/-1,dely=1/-1\)</span>。然后不断填充。</p>
+<hr />
+<p><strong>拟群(quasi-group)</strong>是一种代数系统。</p>
+<p>拟群由一个集合 <span class="math inline">\(S\)</span> 和一个二元运算 <span class="math inline">\(\otimes\)</span> 组成。</p>
+<p>满足以下两个条件：</p>
+<ul>
+<li><p><span class="math inline">\(a \otimes b \in S(a\in S,b\in S)\)</span>。</p></li>
+<li><p><span class="math inline">\(a \otimes x=b,y\otimes a=b\)</span> 这两个方程只有唯一的 <span class="math inline">\(x,y\)</span> 解。</p></li>
+</ul>
+<p>举个例子 <span class="math inline">\(S={0,1,2}, a\otimes b=2\times a+b+1\)</span>。</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: center;"><span class="math inline">\(\otimes\)</span></th>
+<th style="text-align: center;">0</th>
+<th style="text-align: center;">1</th>
+<th style="text-align: center;">2</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">0</td>
+</tr>
+<tr class="even">
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">2</td>
+</tr>
+<tr class="odd">
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">0</td>
+<td style="text-align: center;">1</td>
+</tr>
+</tbody>
+</table>
+<p><strong>幂等拟群</strong>是指满足 <span class="math inline">\(a \otimes a=a (a\in S)\)</span> 的拟群。</p>
+<p>一个拟群是<strong>可交换</strong>的是指满足 <span class="math inline">\(a\otimes b=b\otimes a(a,b\in S)\)</span> 的拟群。</p>
+<hr />
+<p>看到这里也许你会发现，拟群的乘法表实际上就是一个拉丁方阵。</p>
+<p>而幂等拟群可以用一个满足 <span class="math inline">\(a_{x,x}=x\)</span> 的拉丁方阵表示。</p>
+<p>而可交换这一性质可以由 <span class="math inline">\(a_{x,y}=a_{y,x}\)</span> 来体现。</p>
+<p>当 <span class="math inline">\(n\)</span> 为奇数的时候，我们是可以构造一个<strong>可交换的幂等拟群</strong>的，具体形状如下：</p>
+<p><span class="math inline">\(n=3:\)</span></p>
+<pre><code class="hljs plaintext">1 3 2
+3 2 1
+2 1 3</code></pre>
+<p><span class="math inline">\(n=5:\)</span></p>
+<pre><code class="hljs plaintext">1 4 2 5 3
+4 2 5 3 1
+2 5 3 1 4
+5 3 1 4 2
+3 1 4 2 5</code></pre>
+<p>可以发现我们只要选取的初始位置是主对角线上 <span class="math inline">\((i,i)\)</span> 的位置然后向右上方填充即可。</p>
+<p><span class="math inline">\(n\)</span> 为偶数呢？很抱歉，我们构造不出来。原因很简单，一个可交换的幂等拟群中一个元素的出现次数必然是奇数次 ( 对角线上一次+矩阵中 <span class="math inline">\(2x\)</span> 次 )。</p>
+<p>好了，至此我们可以得出一个 <span class="math inline">\(v=6n+3\)</span> 时的做法了。</p>
+<h3 id="mathrmpart-3-关于-v6n3-的构造方法"><span class="math inline">\(\mathrm{Part\ 3}\)</span> 关于 <span class="math inline">\(v=6n+3\)</span> 的构造方法</h3>
+<p>我们将 <span class="math inline">\(1\sim v\)</span> 划分成三组，每组 <span class="math inline">\(m=2n+1\)</span> 个元素。</p>
+<p>设 <span class="math inline">\(g(i,j)\)</span> 表示第 <span class="math inline">\(j\)</span> 组的第 <span class="math inline">\(i\)</span> 个元素。接下来我们构造如下两种三元组：</p>
+<ul>
+<li><span class="math inline">\(\{g(i,0),g(i,1),g(i,2)\}\ (1\leq i\leq m)\)</span>。</li>
+<li><span class="math inline">\(\{g(i,k),g(j,k),g(i\otimes j,(k+1)\bmod 3)\}\ (1\leq i&lt; j\leq m,0\leq k&lt;3)\)</span>。</li>
+</ul>
+<p>可以用如下一张图来解释：</p>
+<p><img src="https://cdn.luogu.com.cn/upload/image_hosting/r7s897tt.png" /></p>
+<p>这种构造的正确性证明：</p>
+<p>首先来计算三元组总数，第一种三元组有 <span class="math inline">\(\frac{v}{3}\)</span> 个，第二种有 <span class="math inline">\(\frac{v\times(v-3)}{6}\)</span> 个，加起来是 <span class="math inline">\(\frac{v\times(v-1)}{6}\)</span> 个。</p>
+<p>接下来只要证明每对元素都在其中出现过即可。</p>
+<p>（下文 <span class="math inline">\(b\)</span> 和 <span class="math inline">\(d\)</span> 均为模 <span class="math inline">\(3\)</span> 意义下的值）</p>
+<p>对于 <span class="math inline">\(g(a,b)\)</span> 和 <span class="math inline">\(g(c,d)\)</span> 两个元素，如果 <span class="math inline">\(a=c\)</span> 那么显然出现过，如果 <span class="math inline">\(a \not = c\)</span> ，假设 <span class="math inline">\(d=b+1\)</span> 根据 <span class="math inline">\(a\otimes x=c\)</span> 的解唯一，且易知 <span class="math inline">\(x\not =a\)</span> 所以必定在第三种出现。</p>
+<p>所以在代码实现中，我们只需要构造一个 可交换的幂等拟群的乘法表（拉丁方阵），然后构造如上的三元组即可。代码难度很小。</p>
+<h3 id="mathrmpart-4-可交换的半幂等拟群"><span class="math inline">\(\mathrm{Part\ 4}\)</span> 可交换的半幂等拟群</h3>
+<p>上文已经提到过，<span class="math inline">\(n\)</span> 为偶数的时候我们不能构造出可交换的幂等拟群。</p>
+<p>但是，我们可以构造出<strong>半幂等拟群</strong>。</p>
+<hr />
+<p><strong>半幂等拟群</strong>指满足 <span class="math inline">\(a\otimes a=(a+\frac{n}{2})\otimes (a+\frac{n}{2})=a (1\leq a\leq \frac{n}{2})\)</span> 的拟群。</p>
+<p><span class="math inline">\(n=4:\)</span></p>
+<pre><code class="hljs plaintext">1 3 2 4
+3 2 4 1
+2 4 1 3
+4 1 3 2</code></pre>
+<p><span class="math inline">\(n=6:\)</span></p>
+<pre><code class="hljs plaintext">1 4 2 5 3 6
+4 2 5 3 6 1
+2 5 3 6 1 4
+5 3 6 1 4 2
+3 6 1 4 2 5
+6 1 4 2 5 3</code></pre>
+<p>构造方法是，对于前 <span class="math inline">\(\frac{n}{2}\)</span> 个数在主对角线上一次构造，后 <span class="math inline">\(\frac{n}{2}\)</span> 个数在主对角线下一斜构造。</p>
+<h3 id="mathrmpart-5-关于-v6n1-的构造方法"><span class="math inline">\(\mathrm{Part\ 5}\)</span> 关于 <span class="math inline">\(v=6n+1\)</span> 的构造方法</h3>
+<p>我们将前 <span class="math inline">\(6n\)</span> 个元素分成三组，每组 <span class="math inline">\(2n\)</span> 个元素。最后一个元素 <span class="math inline">\(v\)</span> 不参与分组。</p>
+<p>设 <span class="math inline">\(g(i,j)\)</span> 表示第 <span class="math inline">\(j\)</span> 组的第 <span class="math inline">\(i\)</span> 个元素。接下来我们构造如下三种三元组：</p>
+<ul>
+<li><p><span class="math inline">\(\{g(i,0),g(i,1),g(i,2)\}\ (1\leq i\leq n)\)</span>，注意这里是 <span class="math inline">\(n\)</span>。</p></li>
+<li><p><span class="math inline">\(\{v,g(i,k),g(n+i,(k-1)\bmod 3)\}\ (1\leq i\leq n,0\leq k&lt;3)\)</span>。</p></li>
+<li><p><span class="math inline">\(\{g(i,k),g(j,k),g(i\otimes j,(k+1)\bmod 3)\}\ (1\leq i&lt; j\leq 2n,0\leq k&lt;3)\)</span>。</p></li>
+</ul>
+<p>同样来分析下正确性：</p>
+<p>第一种三元组个数为 <span class="math inline">\(3n\)</span> 个，第二种为 <span class="math inline">\(3n\)</span> 个，第三种为 <span class="math inline">\(6n^2 – 3n\)</span> 个，加起来是 <span class="math inline">\(\frac{v(v-1)}{6}\)</span> 个。</p>
+<p>接下来只要证明每对元素都在其中出现过即可。</p>
+<p>（下文 <span class="math inline">\(b\)</span> 和 <span class="math inline">\(d\)</span> 均为模 <span class="math inline">\(3\)</span> 意义下的值）</p>
+<p>当其中一个元素是 <span class="math inline">\(v\)</span> 时，显然在第二种出现过。</p>
+<p>对于 <span class="math inline">\(g(a,b)\)</span> 和 <span class="math inline">\(g(c,d)\)</span> 两个元素，如果 <span class="math inline">\(a=c\)</span> ，当 <span class="math inline">\(a\leq n\)</span> 时在第一种中出现过，否则的话根据上面 Part 3 的分析方法总会在第三种出现。</p>
+<p>如果 <span class="math inline">\(a&gt;n,c=a-n\)</span> ，那么如果 <span class="math inline">\(b=d\)</span>，他们会在第三种出现。如果 <span class="math inline">\(b\not =d\)</span>，假设 <span class="math inline">\(d=b+1\)</span>，那么因为 <span class="math inline">\(a\otimes x=c\)</span> 的 <span class="math inline">\(x\)</span> 一定为 <span class="math inline">\(a\)</span> 所以他并不会在第三种三元组出现而是在第二种中出现。</p>
+<p>其他情况均可类似证明在第三种出现过。</p>
+<p>所以在代码实现中，我们只需要构造一个 可交换的半幂等拟群的乘法表（拉丁方阵），然后构造如上的三元组即可。代码难度同样很小。</p>
+<h3 id="mathrmpart-6-代码实现和个人想法"><span class="math inline">\(\mathrm{Part\ 6}\)</span> 代码实现和个人想法</h3>
+<p>这题在构造时需要充分利用拟群的定义才能得出思路，包括 <span class="math inline">\(k=3^t\)</span> 的部分分也需要与拟群类似的思想结合分治才能构造出来。个人感觉是一道很好玩的题。</p>
+<pre><code class="hljs c++"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> poly vector<span class="hljs-meta-string">&lt;int&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> IOS ios::sync_with_stdio(false)</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> ll long long</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> mp make_pair</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> mt make_tuple</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> pa pair <span class="hljs-meta-string">&lt; int,int &gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> fi first</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> se second</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> inf 1e18</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> mod 998244353</span>
+<span class="hljs-comment">//#define int ll</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> N 3005</span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;
+<span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-keyword">char</span> <span class="hljs-title">gc</span><span class="hljs-params">()</span></span>&#123;<span class="hljs-keyword">static</span> <span class="hljs-keyword">char</span> buf[<span class="hljs-number">1000000</span>],*p1=buf,*p2=buf;<span class="hljs-keyword">return</span> p1==p2&amp;&amp;(p2=(p1=buf)+<span class="hljs-built_in">fread</span>(buf,<span class="hljs-number">1</span>,<span class="hljs-number">1000000</span>,stdin),p1==p2)?EOF:*p1++;&#125;
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> gc getchar</span>
+<span class="hljs-function"><span class="hljs-keyword">inline</span> ll <span class="hljs-title">read</span><span class="hljs-params">()</span></span>&#123;<span class="hljs-keyword">char</span> c=<span class="hljs-built_in">gc</span>();ll su=<span class="hljs-number">0</span>,f=<span class="hljs-number">1</span>;<span class="hljs-keyword">for</span> (;c&lt;<span class="hljs-string">&#x27;0&#x27;</span>||c&gt;<span class="hljs-string">&#x27;9&#x27;</span>;c=<span class="hljs-built_in">gc</span>()) <span class="hljs-keyword">if</span> (c==<span class="hljs-string">&#x27;-&#x27;</span>) f=<span class="hljs-number">-1</span>;<span class="hljs-keyword">for</span> (;c&gt;=<span class="hljs-string">&#x27;0&#x27;</span>&amp;&amp;c&lt;=<span class="hljs-string">&#x27;9&#x27;</span>;c=<span class="hljs-built_in">gc</span>()) su=su*<span class="hljs-number">10</span>+c-<span class="hljs-string">&#x27;0&#x27;</span>;<span class="hljs-keyword">return</span> su*f;&#125;
+<span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-keyword">void</span> <span class="hljs-title">write</span><span class="hljs-params">(ll x)</span></span>&#123;<span class="hljs-keyword">if</span> (x&lt;<span class="hljs-number">0</span>)&#123;<span class="hljs-built_in">putchar</span>(<span class="hljs-string">&#x27;-&#x27;</span>);<span class="hljs-built_in">write</span>(-x);<span class="hljs-keyword">return</span>;&#125;<span class="hljs-keyword">if</span> (x&gt;=<span class="hljs-number">10</span>) <span class="hljs-built_in">write</span>(x/<span class="hljs-number">10</span>);<span class="hljs-built_in">putchar</span>(x%<span class="hljs-number">10</span>+<span class="hljs-string">&#x27;0&#x27;</span>);&#125;
+<span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-keyword">void</span> <span class="hljs-title">writesp</span><span class="hljs-params">(ll x)</span></span>&#123;<span class="hljs-built_in">write</span>(x),<span class="hljs-built_in">putchar</span>(<span class="hljs-string">&#x27; &#x27;</span>);&#125;
+<span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-keyword">void</span> <span class="hljs-title">writeln</span><span class="hljs-params">(ll x)</span></span>&#123;<span class="hljs-built_in">write</span>(x);<span class="hljs-built_in">putchar</span>(<span class="hljs-string">&#x27;\n&#x27;</span>);&#125;
+<span class="hljs-keyword">int</span> id[N][<span class="hljs-number">5</span>];
+<span class="hljs-keyword">int</span> p;
+<span class="hljs-keyword">int</span> a[N][N];
+<span class="hljs-keyword">int</span> n;
+vector&lt;tuple&lt;<span class="hljs-keyword">int</span>,<span class="hljs-keyword">int</span>,<span class="hljs-keyword">int</span>&gt;&gt;ans;
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Init</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x)</span><span class="hljs-comment">//构造可交换的幂等拟群</span></span>
+<span class="hljs-function"></span>&#123;
+	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=x;i++)
+		<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j=<span class="hljs-number">1</span>;j&lt;=<span class="hljs-number">3</span>;j++)
+			id[i][j]=(i<span class="hljs-number">-1</span>)*<span class="hljs-number">3</span>+j;
+	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=x;i++)
+	&#123;
+		<span class="hljs-keyword">int</span> nowx=i,nowy=i;
+		<span class="hljs-keyword">while</span> (!a[nowx][nowy])
+		&#123;
+			a[nowx][nowy]=i;
+			nowx--;
+			nowy++;
+			<span class="hljs-keyword">if</span> (nowx==<span class="hljs-number">0</span>) nowx=x;
+			<span class="hljs-keyword">if</span> (nowy==x+<span class="hljs-number">1</span>) nowy=<span class="hljs-number">1</span>;
+		&#125;
+	&#125;
+&#125;
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Init1</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x)</span><span class="hljs-comment">//构造可交换的半幂等拟群</span></span>
+<span class="hljs-function"></span>&#123;
+	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=x;i++)
+		<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j=<span class="hljs-number">1</span>;j&lt;=<span class="hljs-number">3</span>;j++)
+			id[i][j]=(i<span class="hljs-number">-1</span>)*<span class="hljs-number">3</span>+j;
+	p=n;
+	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=x/<span class="hljs-number">2</span>;i++)
+	&#123;
+		<span class="hljs-keyword">int</span> nowx=i,nowy=i;
+		<span class="hljs-keyword">while</span> (!a[nowx][nowy])
+		&#123;
+			a[nowx][nowy]=i;
+			nowx--;
+			nowy++;
+			<span class="hljs-keyword">if</span> (nowx==<span class="hljs-number">0</span>) nowx=x;
+			<span class="hljs-keyword">if</span> (nowy==x+<span class="hljs-number">1</span>) nowy=<span class="hljs-number">1</span>;
+		&#125;
+	&#125;
+	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i=x/<span class="hljs-number">2</span>+<span class="hljs-number">1</span>;i&lt;=x;i++)
+	&#123;
+		<span class="hljs-keyword">int</span> nowx=i-x/<span class="hljs-number">2</span>+<span class="hljs-number">1</span>,nowy=i-x/<span class="hljs-number">2</span>;
+		<span class="hljs-keyword">while</span> (!a[nowx][nowy])
+		&#123;
+			a[nowx][nowy]=i;
+			nowx--;
+			nowy++;
+			<span class="hljs-keyword">if</span> (nowx==<span class="hljs-number">0</span>) nowx=x;
+			<span class="hljs-keyword">if</span> (nowy==x+<span class="hljs-number">1</span>) nowy=<span class="hljs-number">1</span>;
+		&#125;
+	&#125;
+&#125;
+		
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">outp</span><span class="hljs-params">()</span></span>
+<span class="hljs-function"></span>&#123;
+	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> u:ans) <span class="hljs-built_in">writesp</span>(get&lt;<span class="hljs-number">0</span>&gt;(u)),<span class="hljs-built_in">writesp</span>(get&lt;<span class="hljs-number">1</span>&gt;(u)),<span class="hljs-built_in">writeln</span>(get&lt;<span class="hljs-number">2</span>&gt;(u));
+&#125;
+<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">BellaKira</span><span class="hljs-params">()</span></span>
+<span class="hljs-function"></span>&#123;
+	n=<span class="hljs-built_in">read</span>();
+	<span class="hljs-keyword">if</span> (n%<span class="hljs-number">6</span>==<span class="hljs-number">3</span>)
+	&#123;
+		<span class="hljs-built_in">Init</span>(n/<span class="hljs-number">3</span>);
+		<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=n/<span class="hljs-number">3</span>;i++)
+			<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j=i;j&lt;=n/<span class="hljs-number">3</span>;j++)
+			&#123;
+				<span class="hljs-keyword">if</span> (i==j)
+					ans.<span class="hljs-built_in">push_back</span>(<span class="hljs-built_in">mt</span>(id[i][<span class="hljs-number">1</span>],id[i][<span class="hljs-number">2</span>],id[i][<span class="hljs-number">3</span>]));
+				<span class="hljs-keyword">else</span>
+				&#123;
+					<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> k=<span class="hljs-number">1</span>;k&lt;=<span class="hljs-number">3</span>;k++)
+						ans.<span class="hljs-built_in">push_back</span>(<span class="hljs-built_in">mt</span>(id[i][k],id[j][k],id[a[i][j]][(k)%<span class="hljs-number">3</span>+<span class="hljs-number">1</span>]));
+				&#125;
+			&#125;
+		<span class="hljs-built_in">outp</span>();
+	&#125; <span class="hljs-keyword">else</span>
+	&#123;
+		<span class="hljs-built_in">Init1</span>((n<span class="hljs-number">-1</span>)/<span class="hljs-number">3</span>);
+		<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=n/<span class="hljs-number">3</span>;i++)
+		&#123;
+			<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j=i;j&lt;=n/<span class="hljs-number">3</span>;j++)
+			&#123;
+				<span class="hljs-keyword">if</span> (i==j&amp;&amp;i&lt;=n/<span class="hljs-number">6</span>)
+					ans.<span class="hljs-built_in">push_back</span>(<span class="hljs-built_in">mt</span>(id[i][<span class="hljs-number">1</span>],id[i][<span class="hljs-number">2</span>],id[i][<span class="hljs-number">3</span>]));
+				<span class="hljs-keyword">else</span>
+				<span class="hljs-keyword">if</span> (i!=j)
+				&#123;
+					<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> k=<span class="hljs-number">1</span>;k&lt;=<span class="hljs-number">3</span>;k++)
+						ans.<span class="hljs-built_in">push_back</span>(<span class="hljs-built_in">mt</span>(id[i][k],id[j][k],id[a[i][j]][(k)%<span class="hljs-number">3</span>+<span class="hljs-number">1</span>]));
+				&#125;
+			&#125;
+			<span class="hljs-keyword">if</span> (i&lt;=n/<span class="hljs-number">6</span>)
+			&#123;
+				<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> k=<span class="hljs-number">1</span>;k&lt;=<span class="hljs-number">3</span>;k++)
+					ans.<span class="hljs-built_in">push_back</span>(<span class="hljs-built_in">mt</span>(p,id[i][k],id[n/<span class="hljs-number">6</span>+i][(k<span class="hljs-number">-1</span>+<span class="hljs-number">3</span><span class="hljs-number">-1</span>)%<span class="hljs-number">3</span>+<span class="hljs-number">1</span>]));
+			&#125;
+		&#125;
+		<span class="hljs-built_in">outp</span>();
+	&#125;
+&#125;
+<span class="hljs-function"><span class="hljs-keyword">signed</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>
+<span class="hljs-function"></span>&#123;
+	<span class="hljs-keyword">int</span> T=<span class="hljs-number">1</span>;
+	<span class="hljs-keyword">while</span> (T--)
+	&#123;
+		<span class="hljs-built_in">BellaKira</span>();
+	&#125;
+&#125;
+<span class="hljs-comment">/*</span>
+<span class="hljs-comment"></span>
+<span class="hljs-comment">*/</span></code></pre>
+
+        </div>
+        
+        
+        
+        <div class="article-tags">
+            <ul class="tags-list cl">
+                
+                <li><a href="/tags/小记/"><i class="fa fa-tag"></i>小记</a></li>
+                
+            </ul>
+        </div>
+        
+        <div class="article-pagination cl">
+        
+            <div class="pagination-prev">
+                <a href="/2022/01/04/%E9%A2%98%E8%A7%A3%20AT2536%20%E5%88%87%E7%AC%A6%E3%81%AE%E6%89%8B%E9%85%8D%20(Arranging%20Tickets)/">题解 AT2536 切符の手配 (Arranging Tickets)</a>
+            </div>
+        
+        
+            <div class="pagination-next">
+                <a href="/2021/12/14/%E9%A2%98%E8%A7%A3%20P7975%20%E3%80%8CStoi2033%E3%80%8D%E5%88%86%E8%A3%82/">题解 P7975 「Stoi2033」分裂</a>
+            </div>
+        
+        </div>
+
+        
+    </div>
+</article>
+
+    </section>
+    
+<section class="tool-area">
+
+    <div class="toolbar">
+        
+
+        
+        <div class="widget-post widget" style="order: 1 ">
+            <h2 class="widget-title"><i class="fa fa-file-text"></i> 近期文章</h2>
+            <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2022/01/25/YACS2022JAN%20%E9%A2%98%E8%A7%A3/">YACS2022 Jan 题解</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/18/CF%203000+%20%E5%8D%B7%E9%A2%98%E8%AE%B0%E5%BD%95/">CF 3000+ 好题卷题记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/04/%E9%A2%98%E8%A7%A3%20AT2536%20%E5%88%87%E7%AC%A6%E3%81%AE%E6%89%8B%E9%85%8D%20(Arranging%20Tickets)/">题解 AT2536 切符の手配 (Arranging Tickets)</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/23/Steiner%20%E4%B8%89%E5%85%83%E7%B3%BB%E5%AD%A6%E4%B9%A0%E5%B0%8F%E8%AE%B0/">Steiner 三元系学习小记</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/14/%E9%A2%98%E8%A7%A3%20P7975%20%E3%80%8CStoi2033%E3%80%8D%E5%88%86%E8%A3%82/">题解 P7975 「Stoi2033」分裂</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/08/%E9%A2%98%E8%A7%A3%20CF886E%20Maximum%20Element/">题解 CF886E Maximum Element</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/23/%E9%A2%98%E8%A7%A3%20CF1612F%20Armor%20and%20Weapons/">题解 CF1612F Armor and Weapons</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/21/%E6%A2%A6%E7%A2%8E%20NOIP2021/">梦碎 NOIP2021</a></li></ul>
+        </div>
+        
+
+        
+        <div class="widget-tags widget" style="order: 2 ">
+            <h2 class="widget-title"><i class="fa fa-tags"></i> 标签</h2>
+            <a href="/tags/%E5%B0%8F%E8%AE%B0/" style="font-size: 10px;">小记</a> <a href="/tags/%E6%B8%B8%E8%AE%B0/" style="font-size: 15px;">游记</a> <a href="/tags/%E9%A2%98%E8%A7%A3/" style="font-size: 20px;">题解</a>
+        </div>
+        
+
+        
+        <div class="widget-categories widget" style="order: 3 ">
+            <h2 class="widget-title"><i class="fa fa-folder-open"></i> 分类</h2>
+            
+        </div>
+        
+
+    </div>
+</section>
+</div>
+
+    
+        <footer class="footer">
+	<p class="footer-intro">
+		
+		@2022 LYC_music的小窝.
+	</p>
+	<p class="footer-intro">
+			Powered By <a href="https://hexo.io/zh-cn/" target="_blank">hexo</a>
+			theme <a href="https://github.com/iengu/hexo-theme-mokusei" target="_blank">mokusei</a> by <a href="https://www.iengu.com" target="blank">iengu</a>
+	</p>
+</footer>
+
+
+
+
+        <div class="extend-tools" id="extend-tools" style="display: none;">
+    <ul>
+        <li class="tools-returnTop" title="返回顶部"><i class="fa fa-angle-double-up"></i></li>
+    </ul>
+</div>
+
+	</div>
+
+	
+<script src="/js/org/jquery.min.js"></script>
+
+    
+<script src="/js/extend.js"></script>
+
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>  
+</body>
+</html>

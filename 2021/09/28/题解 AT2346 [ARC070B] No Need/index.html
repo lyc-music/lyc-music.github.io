@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="zh-CN" >
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<title>题解 AT2346 [ARC070B] No Need - LYC_music的小窝</title>
+    <link rel="alternate" href="" type="application/atom+xml"/>
+	<link rel="shortcut icon" href=""/>
+	
+<link rel="stylesheet" href="/css/style.css">
+
+	
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+	
+<meta name="generator" content="Hexo 6.0.0"></head>
+
+<body>
+	<div class="main-con">
+
+        <div class="nav cl">
+    <ul class="cl nav-list">
+        
+            <li>
+                
+                    <a href="/" class="">
+                        <i class="fa fa-home"></i> 
+                        <span>主页</span>
+                    </a>
+                
+            </li>
+        
+            <li>
+                
+                    <a href="/archives/" class="">
+                        <i class=" fa-"></i> 
+                        <span>归档</span>
+                    </a>
+                
+            </li>
+        
+            <li>
+                
+                    
+                    <a href="javascript:void(0)" class="">
+                    
+                        <i class=" fa-"></i> 
+                        <span>关于</span>
+                        <span class="drop-flag fa fa-angle-down"></span>
+                    </a>
+                    <dl>
+                        
+                            <li>
+                                <a href="/about" class="">
+                                    <i class=" fa-"></i>
+                                    <span>关于本站</span>
+                                </a>
+                            </li>
+                        
+                    </dl>
+                
+            </li>
+        
+    </ul>
+    <ul class="cl nav-tool">
+        
+            <li>
+                <a href="/github">
+                    <i class="fa fa-github"></i>
+                </a>
+            </li>
+        
+            <li>
+                <a href="/mail">
+                    <i class="fa fa-envelope"></i>
+                </a>
+            </li>
+        
+            <li>
+                <a href="/twitter">
+                    <i class="fa fa-twitter"></i>
+                </a>
+            </li>
+        
+        
+        <li>
+            <a href="javascript:void(0)" class="nav-search-btn">
+                <i class="fa fa-search"></i>
+            </a>
+        </li>
+        
+    </ul>
+    <form action="//google.com/search" method="get" accept-charset="UTF-8" class="nav-search"><input type="search" name="q" class="nav-search-input" placeholder="search..."><input type="hidden" name="sitesearch" value="https://lyc-music.github.io"></form>
+</div>
+
+        <header class="top" id="fallEle" style="background-image: url(/imgs/bella.jpg)">
+    <i class="fa fa-bars" id="media-toggle" style="display: none"></i>
+    <div class="top-info cl fadeToBottom">
+        <h2 class="site-name"><a href="/">LYC_music的小窝</a> <small id="type-data"></small></h2>
+    </div>
+</header>
+
+        <div class="con-wrap fadeToTop">
+    
+    <section class="article-area">
+    
+        <article class="article">
+    <div class="article-wrap">
+        
+            <h2 class="article-title cl">
+                题解 AT2346 [ARC070B] No Need
+            </h2>
+        
+
+        <ul class="article-extra" style="margin-bottom: 20px">
+            
+            <li class="article-time">
+                2021-09-28
+            </li>
+            
+
+            
+                
+            
+
+
+        </ul>
+        <div class="article-description">
+            
+            <p>我的做法是 <span class="math inline">\(O(nk)\)</span> 的，一个简单的回退背包。</p>
+<p>可以发现一个结论，若把物品 <span class="math inline">\(i\)</span> 去掉后存在和在 <span class="math inline">\(k-a_i\sim k-1\)</span> 的方案那么物品 <span class="math inline">\(i\)</span> 就不能成为可有可无的物品。</p>
+<p>这样子容易想到 <span class="math inline">\(O(n^2k)\)</span> 的暴力可行性背包，时间复杂度爆炸。</p>
+<p>考虑把上面的可行性背包换成方案数背包。</p>
+<p><span class="math inline">\(f_i\)</span> 表示和为 <span class="math inline">\(i\)</span> 的方案数，先做一遍普通的 <span class="math inline">\(01\)</span> 背包。然后考虑去掉物品 <span class="math inline">\(i\)</span> 相当于将这个转移回退回去，也就是 <span class="math inline">\(f_j=f_j-f_{j-a_i}\)</span>。然后我们再在 <span class="math inline">\(k-a_i\sim k-1\)</span> 这段区间里查找是否有 <span class="math inline">\(f_j&gt;0\)</span> 的值。</p>
+<p>但是方案数很大，我们可以考虑模一个大质数，这样子一个 <span class="math inline">\(f_k\)</span> 实际不为 <span class="math inline">\(0\)</span> 但取模为 <span class="math inline">\(0\)</span> 的概率很小，所以完全能保证正确性。 <span id="more"></span></p>
+<pre><code class="hljs c++"><span class="hljs-comment">//QwQcOrZ yyds!!!</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> ll long long</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> F(i,a,b) for (int i=(a);i&lt;=(b);i++)</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> R(i,a,b) for (int i=(a);i&lt;(b);i++)</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> D(i,a,b) for (int i=(a);i&gt;=(b);i--)</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> go(i,x) for (int i=head[x];i;i=e[i].nx)</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> IOS ios::sync_with_stdio(false)</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> mp make_pair</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> pb push_back</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> pa pair <span class="hljs-meta-string">&lt; int,int &gt;</span></span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> fi first</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> se second</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> re register</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> be begin()</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> en end()</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> sqr(x) ((x)*(x))</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> ret return puts(<span class="hljs-meta-string">&quot;-1&quot;</span>),0;</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> put putchar(<span class="hljs-meta-string">&#x27;\n&#x27;</span>)</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> inf 1000000005</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> mod 1000000007</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> int ll</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> N 50005</span>
+<span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;
+<span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-keyword">char</span> <span class="hljs-title">gc</span><span class="hljs-params">()</span></span>&#123;<span class="hljs-keyword">static</span> <span class="hljs-keyword">char</span> buf[<span class="hljs-number">1000000</span>],*p1=buf,*p2=buf;<span class="hljs-keyword">return</span> p1==p2&amp;&amp;(p2=(p1=buf)+<span class="hljs-built_in">fread</span>(buf,<span class="hljs-number">1</span>,<span class="hljs-number">1000000</span>,stdin),p1==p2)?EOF:*p1++;&#125;
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> gc getchar</span>
+<span class="hljs-function"><span class="hljs-keyword">inline</span> ll <span class="hljs-title">read</span><span class="hljs-params">()</span></span>&#123;<span class="hljs-keyword">char</span> c=<span class="hljs-built_in">gc</span>();ll su=<span class="hljs-number">0</span>,f=<span class="hljs-number">1</span>;<span class="hljs-keyword">for</span> (;c&lt;<span class="hljs-string">&#x27;0&#x27;</span>||c&gt;<span class="hljs-string">&#x27;9&#x27;</span>;c=<span class="hljs-built_in">gc</span>()) <span class="hljs-keyword">if</span> (c==<span class="hljs-string">&#x27;-&#x27;</span>) f=<span class="hljs-number">-1</span>;<span class="hljs-keyword">for</span> (;c&gt;=<span class="hljs-string">&#x27;0&#x27;</span>&amp;&amp;c&lt;=<span class="hljs-string">&#x27;9&#x27;</span>;c=<span class="hljs-built_in">gc</span>()) su=su*<span class="hljs-number">10</span>+c-<span class="hljs-string">&#x27;0&#x27;</span>;<span class="hljs-keyword">return</span> su*f;&#125;
+<span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-keyword">void</span> <span class="hljs-title">write</span><span class="hljs-params">(ll x)</span></span>&#123;<span class="hljs-keyword">if</span> (x&lt;<span class="hljs-number">0</span>)&#123;<span class="hljs-built_in">putchar</span>(<span class="hljs-string">&#x27;-&#x27;</span>);<span class="hljs-built_in">write</span>(-x);<span class="hljs-keyword">return</span>;&#125;<span class="hljs-keyword">if</span> (x&gt;=<span class="hljs-number">10</span>) <span class="hljs-built_in">write</span>(x/<span class="hljs-number">10</span>);<span class="hljs-built_in">putchar</span>(x%<span class="hljs-number">10</span>+<span class="hljs-string">&#x27;0&#x27;</span>);&#125;
+<span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-keyword">void</span> <span class="hljs-title">writesp</span><span class="hljs-params">(ll x)</span></span>&#123;<span class="hljs-built_in">write</span>(x),<span class="hljs-built_in">putchar</span>(<span class="hljs-string">&#x27; &#x27;</span>);&#125;
+<span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-keyword">void</span> <span class="hljs-title">writeln</span><span class="hljs-params">(ll x)</span></span>&#123;<span class="hljs-built_in">write</span>(x);<span class="hljs-built_in">putchar</span>(<span class="hljs-string">&#x27;\n&#x27;</span>);&#125;
+<span class="hljs-keyword">int</span> n,m,f[N],a[N],ans;
+<span class="hljs-function"><span class="hljs-keyword">signed</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>
+<span class="hljs-function"></span>&#123;
+	n=<span class="hljs-built_in">read</span>(),m=<span class="hljs-built_in">read</span>();
+	f[<span class="hljs-number">0</span>]=<span class="hljs-number">1</span>;
+	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=n;i++)
+	&#123;
+		a[i]=<span class="hljs-built_in">read</span>();
+		<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j=m*<span class="hljs-number">2</span>;j&gt;=a[i];j--)
+			f[j]=(f[j]+f[j-a[i]])%mod;
+	&#125;
+	<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>;i&lt;=n;i++)
+	&#123;
+		<span class="hljs-keyword">int</span> x=<span class="hljs-number">0</span>;
+		<span class="hljs-keyword">if</span> (a[i]&gt;=m) <span class="hljs-keyword">continue</span>;
+		<span class="hljs-keyword">else</span>
+		&#123;
+			<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j=a[i];j&lt;=m*<span class="hljs-number">2</span>;j++)
+				f[j]=(f[j]-f[j-a[i]]+mod)%mod;
+			<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j=m-a[i];j&lt;m;j++)
+				<span class="hljs-keyword">if</span> (f[j]) x=<span class="hljs-number">1</span>;
+			<span class="hljs-keyword">if</span> (!x) ans++;
+			<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j=m*<span class="hljs-number">2</span>;j&gt;=a[i];j--)
+				f[j]=(f[j]+f[j-a[i]]+mod)%mod;
+		&#125;
+	&#125;
+	<span class="hljs-built_in">writeln</span>(ans);
+&#125;
+<span class="hljs-comment">/*</span>
+<span class="hljs-comment"></span>
+<span class="hljs-comment">*/</span></code></pre>
+
+        </div>
+        
+        
+        
+        <div class="article-tags">
+            <ul class="tags-list cl">
+                
+                <li><a href="/tags/题解/"><i class="fa fa-tag"></i>题解</a></li>
+                
+            </ul>
+        </div>
+        
+        <div class="article-pagination cl">
+        
+            <div class="pagination-prev">
+                <a href="/2021/10/24/CSP%202021%20%E7%99%BD%E7%BB%99%E8%AE%B0/">CSP 2021 白给记</a>
+            </div>
+        
+        
+            <div class="pagination-next">
+                <a href="/2021/09/28/%E9%A2%98%E8%A7%A3%20CF1332F%20Independent%20Set/">题解 CF1332F Independent Set</a>
+            </div>
+        
+        </div>
+
+        
+    </div>
+</article>
+
+    </section>
+    
+<section class="tool-area">
+
+    <div class="toolbar">
+        
+
+        
+        <div class="widget-post widget" style="order: 1 ">
+            <h2 class="widget-title"><i class="fa fa-file-text"></i> 近期文章</h2>
+            <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2022/01/25/YACS2022JAN%20%E9%A2%98%E8%A7%A3/">YACS2022 Jan 题解</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/18/CF%203000+%20%E5%8D%B7%E9%A2%98%E8%AE%B0%E5%BD%95/">CF 3000+ 好题卷题记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/04/%E9%A2%98%E8%A7%A3%20AT2536%20%E5%88%87%E7%AC%A6%E3%81%AE%E6%89%8B%E9%85%8D%20(Arranging%20Tickets)/">题解 AT2536 切符の手配 (Arranging Tickets)</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/23/Steiner%20%E4%B8%89%E5%85%83%E7%B3%BB%E5%AD%A6%E4%B9%A0%E5%B0%8F%E8%AE%B0/">Steiner 三元系学习小记</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/14/%E9%A2%98%E8%A7%A3%20P7975%20%E3%80%8CStoi2033%E3%80%8D%E5%88%86%E8%A3%82/">题解 P7975 「Stoi2033」分裂</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/08/%E9%A2%98%E8%A7%A3%20CF886E%20Maximum%20Element/">题解 CF886E Maximum Element</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/23/%E9%A2%98%E8%A7%A3%20CF1612F%20Armor%20and%20Weapons/">题解 CF1612F Armor and Weapons</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/21/%E6%A2%A6%E7%A2%8E%20NOIP2021/">梦碎 NOIP2021</a></li></ul>
+        </div>
+        
+
+        
+        <div class="widget-tags widget" style="order: 2 ">
+            <h2 class="widget-title"><i class="fa fa-tags"></i> 标签</h2>
+            <a href="/tags/%E5%B0%8F%E8%AE%B0/" style="font-size: 10px;">小记</a> <a href="/tags/%E6%B8%B8%E8%AE%B0/" style="font-size: 15px;">游记</a> <a href="/tags/%E9%A2%98%E8%A7%A3/" style="font-size: 20px;">题解</a>
+        </div>
+        
+
+        
+        <div class="widget-categories widget" style="order: 3 ">
+            <h2 class="widget-title"><i class="fa fa-folder-open"></i> 分类</h2>
+            
+        </div>
+        
+
+    </div>
+</section>
+</div>
+
+    
+        <footer class="footer">
+	<p class="footer-intro">
+		
+		@2022 LYC_music的小窝.
+	</p>
+	<p class="footer-intro">
+			Powered By <a href="https://hexo.io/zh-cn/" target="_blank">hexo</a>
+			theme <a href="https://github.com/iengu/hexo-theme-mokusei" target="_blank">mokusei</a> by <a href="https://www.iengu.com" target="blank">iengu</a>
+	</p>
+</footer>
+
+
+
+
+        <div class="extend-tools" id="extend-tools" style="display: none;">
+    <ul>
+        <li class="tools-returnTop" title="返回顶部"><i class="fa fa-angle-double-up"></i></li>
+    </ul>
+</div>
+
+	</div>
+
+	
+<script src="/js/org/jquery.min.js"></script>
+
+    
+<script src="/js/extend.js"></script>
+
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>  
+</body>
+</html>
