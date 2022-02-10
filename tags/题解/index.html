@@ -116,6 +116,43 @@
     <div class="article-wrap">
         
             <h2 class="article-title cl">
+                <a href="/2022/02/10/题解 P8119 「Wdoi-1.5」幻想乡游览计划/" title="题解 P8119 「Wdoi-1.5」幻想乡游览计划">
+                    题解 P8119 「Wdoi-1.5」幻想乡游览计划
+                </a>
+            </h2>
+        
+
+        <ul class="article-extra" style="margin-bottom: 20px">
+            
+            <li class="article-time">
+                2022-02-10
+            </li>
+            
+
+            
+                
+            
+
+
+        </ul>
+        <div class="article-description">
+            
+            <p>第一次做出月赛1C，写个题解纪念一下，虽然这个1C可能相比较于别的1C简单了不少。</p>
+        </div>
+        
+            
+                <a href="/2022/02/10/题解 P8119 「Wdoi-1.5」幻想乡游览计划/" class="more-link">阅读更多...</a>
+            
+        
+        
+    </div>
+</article>
+
+        
+            <article class="article">
+    <div class="article-wrap">
+        
+            <h2 class="article-title cl">
                 <a href="/2022/01/25/YACS2022JAN 题解/" title="YACS2022 Jan 题解">
                     YACS2022 Jan 题解
                 </a>
@@ -472,48 +509,6 @@
 </article>
 
         
-            <article class="article">
-    <div class="article-wrap">
-        
-            <h2 class="article-title cl">
-                <a href="/2021/09/28/题解 AT2346 [ARC070B] No Need/" title="题解 AT2346 [ARC070B] No Need">
-                    题解 AT2346 [ARC070B] No Need
-                </a>
-            </h2>
-        
-
-        <ul class="article-extra" style="margin-bottom: 20px">
-            
-            <li class="article-time">
-                2021-09-28
-            </li>
-            
-
-            
-                
-            
-
-
-        </ul>
-        <div class="article-description">
-            
-            <p>我的做法是 <span class="math inline">\(O(nk)\)</span> 的，一个简单的回退背包。</p>
-<p>可以发现一个结论，若把物品 <span class="math inline">\(i\)</span> 去掉后存在和在 <span class="math inline">\(k-a_i\sim k-1\)</span> 的方案那么物品 <span class="math inline">\(i\)</span> 就不能成为可有可无的物品。</p>
-<p>这样子容易想到 <span class="math inline">\(O(n^2k)\)</span> 的暴力可行性背包，时间复杂度爆炸。</p>
-<p>考虑把上面的可行性背包换成方案数背包。</p>
-<p><span class="math inline">\(f_i\)</span> 表示和为 <span class="math inline">\(i\)</span> 的方案数，先做一遍普通的 <span class="math inline">\(01\)</span> 背包。然后考虑去掉物品 <span class="math inline">\(i\)</span> 相当于将这个转移回退回去，也就是 <span class="math inline">\(f_j=f_j-f_{j-a_i}\)</span>。然后我们再在 <span class="math inline">\(k-a_i\sim k-1\)</span> 这段区间里查找是否有 <span class="math inline">\(f_j&gt;0\)</span> 的值。</p>
-<p>但是方案数很大，我们可以考虑模一个大质数，这样子一个 <span class="math inline">\(f_k\)</span> 实际不为 <span class="math inline">\(0\)</span> 但取模为 <span class="math inline">\(0\)</span> 的概率很小，所以完全能保证正确性。
-        </div>
-        
-            
-                <a href="/2021/09/28/题解 AT2346 [ARC070B] No Need/" class="more-link">阅读更多...</a>
-            
-        
-        
-    </div>
-</article>
-
-        
         <ul class="pagination clear">
     <span class="page-number current">1</span><a class="page-number" href="/tags/%E9%A2%98%E8%A7%A3/page/2/">2</a><a class="extend next" rel="next" href="/tags/%E9%A2%98%E8%A7%A3/page/2/">下一页</a>
 </ul>
@@ -527,7 +522,7 @@
         
         <div class="widget-post widget" style="order: 1 ">
             <h2 class="widget-title"><i class="fa fa-file-text"></i> 近期文章</h2>
-            <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2022/01/25/YACS2022JAN%20%E9%A2%98%E8%A7%A3/">YACS2022 Jan 题解</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/18/CF%203000+%20%E5%8D%B7%E9%A2%98%E8%AE%B0%E5%BD%95/">CF 3000+ 好题卷题记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/04/%E9%A2%98%E8%A7%A3%20AT2536%20%E5%88%87%E7%AC%A6%E3%81%AE%E6%89%8B%E9%85%8D%20(Arranging%20Tickets)/">题解 AT2536 切符の手配 (Arranging Tickets)</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/23/Steiner%20%E4%B8%89%E5%85%83%E7%B3%BB%E5%AD%A6%E4%B9%A0%E5%B0%8F%E8%AE%B0/">Steiner 三元系学习小记</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/14/%E9%A2%98%E8%A7%A3%20P7975%20%E3%80%8CStoi2033%E3%80%8D%E5%88%86%E8%A3%82/">题解 P7975 「Stoi2033」分裂</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/08/%E9%A2%98%E8%A7%A3%20CF886E%20Maximum%20Element/">题解 CF886E Maximum Element</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/23/%E9%A2%98%E8%A7%A3%20CF1612F%20Armor%20and%20Weapons/">题解 CF1612F Armor and Weapons</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/21/%E6%A2%A6%E7%A2%8E%20NOIP2021/">梦碎 NOIP2021</a></li></ul>
+            <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2022/02/10/%E9%A2%98%E8%A7%A3%20P8119%20%E3%80%8CWdoi-1.5%E3%80%8D%E5%B9%BB%E6%83%B3%E4%B9%A1%E6%B8%B8%E8%A7%88%E8%AE%A1%E5%88%92/">题解 P8119 「Wdoi-1.5」幻想乡游览计划</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/25/YACS2022JAN%20%E9%A2%98%E8%A7%A3/">YACS2022 Jan 题解</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/18/CF%203000+%20%E5%8D%B7%E9%A2%98%E8%AE%B0%E5%BD%95/">CF 3000+ 好题卷题记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/04/%E9%A2%98%E8%A7%A3%20AT2536%20%E5%88%87%E7%AC%A6%E3%81%AE%E6%89%8B%E9%85%8D%20(Arranging%20Tickets)/">题解 AT2536 切符の手配 (Arranging Tickets)</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/23/Steiner%20%E4%B8%89%E5%85%83%E7%B3%BB%E5%AD%A6%E4%B9%A0%E5%B0%8F%E8%AE%B0/">Steiner 三元系学习小记</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/14/%E9%A2%98%E8%A7%A3%20P7975%20%E3%80%8CStoi2033%E3%80%8D%E5%88%86%E8%A3%82/">题解 P7975 「Stoi2033」分裂</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/08/%E9%A2%98%E8%A7%A3%20CF886E%20Maximum%20Element/">题解 CF886E Maximum Element</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/23/%E9%A2%98%E8%A7%A3%20CF1612F%20Armor%20and%20Weapons/">题解 CF1612F Armor and Weapons</a></li></ul>
         </div>
         
 

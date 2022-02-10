@@ -118,6 +118,46 @@
     <div class="article-wrap">
         
             <h2 class="article-title cl">
+                <a href="/2021/11/04/题解 CF403E Two Rooted Trees/" title="题解 CF403E Two Rooted Trees">
+                    题解 CF403E Two Rooted Trees
+                </a>
+            </h2>
+        
+
+        <ul class="article-extra" style="margin-bottom: 20px">
+            
+            <li class="article-time">
+                2021-11-04
+            </li>
+            
+
+            
+                
+            
+
+
+        </ul>
+        <div class="article-description">
+            
+            <p>这里给出一个不需要树剖的做法。</p>
+<p>对于第一棵树中的一条边 <span class="math inline">\((u,v)\)</span> 设 <span class="math inline">\(v\)</span> 是 <span class="math inline">\(u\)</span> 的儿子。我们设每个点在第一棵树上的 dfs 序为 <span class="math inline">\(a_i\)</span>，第二棵树中为 <span class="math inline">\(b_i\)</span>。显然在第二棵树中需要删掉的边 <span class="math inline">\((x,y)\)</span> 满足 <span class="math inline">\(x,y\)</span> 其中一个的 dfs 序在 <span class="math inline">\(v\)</span> 子树中另一个不在。那么相当于平面上的两个矩形，直接开两个线段树维护即可。</p>
+<p>具体维护方法有很多种，我的方法是把这个点在每个覆盖它的区间都插入一遍，然后区间查询取出的时候判断一下是否已经取出过即可，时间复杂度和空间复杂度 <span class="math inline">\(O(n \log n)\)</span>。</p>
+        </div>
+        
+            
+                <a href="/2021/11/04/题解 CF403E Two Rooted Trees/" class="more-link">阅读更多...</a>
+            
+        
+        
+    </div>
+</article>
+
+        
+            
+            <article class="article">
+    <div class="article-wrap">
+        
+            <h2 class="article-title cl">
                 <a href="/2021/11/02/题解 CF1237E Balanced Binary Search Trees/" title="题解 CF1237E Balanced Binary Search Trees">
                     题解 CF1237E Balanced Binary Search Trees
                 </a>
@@ -508,55 +548,6 @@
 </article>
 
         
-            
-            <article class="article">
-    <div class="article-wrap">
-        
-            <h2 class="article-title cl">
-                <a href="/2021/07/26/NOI2021 网络同步赛游记/" title="NOI2021 网络同步赛游记">
-                    NOI2021 网络同步赛游记
-                </a>
-            </h2>
-        
-
-        <ul class="article-extra" style="margin-bottom: 20px">
-            
-            <li class="article-time">
-                2021-07-26
-            </li>
-            
-
-            
-                
-            
-
-
-        </ul>
-        <div class="article-description">
-            
-            <p>同步赛选手，来划水。</p>
-<h3 id="day-1">Day 1</h3>
-<p>早上起来发现昨天 cf 的 D fst 了！！！非常恼火</p>
-<p>同步赛咕咕咕了半天终于在 10:00 开始了</p>
-<p>开场看 T1，想了一会儿就想出来了，确实比较签到。（只不过写+调了 1.5h 然后裂开）</p>
-<p>主要思想就是想到一条边是重边当且仅当相连的两点最新被修改的操作编号相同，接下来就是一个裸的树剖。</p>
-<p>看 T2 发现完全不会，直到 zjc 跟我说直接暴力行列式的时候我才醒悟！</p>
-<p>然后敲完了一个裸的行列式就直接不管了，能过 75 分。</p>
-<p>T3 写了暴力，然后我就开始摸鱼。</p>
-<p>估分 <span class="math inline">\(100+75+16=191\)</span>，退役 。</p>
-<p>实际 <span class="math inline">\(100+50+16=166\)</span> 挂飞了/ll 赛后发现是行列式求值写挂了，然后就被拉飞。</p>
-<p>不过过了 Ag 线还是比较侥幸。听说sxyz正式选手今天都不是很好，希望他们 Day 2 能够翻盘吧/保佑</p>
-        </div>
-        
-            
-                <a href="/2021/07/26/NOI2021 网络同步赛游记/" class="more-link">阅读更多...</a>
-            
-        
-        
-    </div>
-</article>
-
-        
         <ul class="pagination clear">
     <a class="extend prev" rel="prev" href="/archives/">上一页</a><a class="page-number" href="/archives/">1</a><span class="page-number current">2</span><a class="page-number" href="/archives/page/3/">3</a><a class="extend next" rel="next" href="/archives/page/3/">下一页</a>
 </ul>
@@ -570,7 +561,7 @@
         
         <div class="widget-post widget" style="order: 1 ">
             <h2 class="widget-title"><i class="fa fa-file-text"></i> 近期文章</h2>
-            <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2022/01/25/YACS2022JAN%20%E9%A2%98%E8%A7%A3/">YACS2022 Jan 题解</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/18/CF%203000+%20%E5%8D%B7%E9%A2%98%E8%AE%B0%E5%BD%95/">CF 3000+ 好题卷题记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/04/%E9%A2%98%E8%A7%A3%20AT2536%20%E5%88%87%E7%AC%A6%E3%81%AE%E6%89%8B%E9%85%8D%20(Arranging%20Tickets)/">题解 AT2536 切符の手配 (Arranging Tickets)</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/23/Steiner%20%E4%B8%89%E5%85%83%E7%B3%BB%E5%AD%A6%E4%B9%A0%E5%B0%8F%E8%AE%B0/">Steiner 三元系学习小记</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/14/%E9%A2%98%E8%A7%A3%20P7975%20%E3%80%8CStoi2033%E3%80%8D%E5%88%86%E8%A3%82/">题解 P7975 「Stoi2033」分裂</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/08/%E9%A2%98%E8%A7%A3%20CF886E%20Maximum%20Element/">题解 CF886E Maximum Element</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/23/%E9%A2%98%E8%A7%A3%20CF1612F%20Armor%20and%20Weapons/">题解 CF1612F Armor and Weapons</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/21/%E6%A2%A6%E7%A2%8E%20NOIP2021/">梦碎 NOIP2021</a></li></ul>
+            <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2022/02/10/%E9%A2%98%E8%A7%A3%20P8119%20%E3%80%8CWdoi-1.5%E3%80%8D%E5%B9%BB%E6%83%B3%E4%B9%A1%E6%B8%B8%E8%A7%88%E8%AE%A1%E5%88%92/">题解 P8119 「Wdoi-1.5」幻想乡游览计划</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/25/YACS2022JAN%20%E9%A2%98%E8%A7%A3/">YACS2022 Jan 题解</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/18/CF%203000+%20%E5%8D%B7%E9%A2%98%E8%AE%B0%E5%BD%95/">CF 3000+ 好题卷题记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/04/%E9%A2%98%E8%A7%A3%20AT2536%20%E5%88%87%E7%AC%A6%E3%81%AE%E6%89%8B%E9%85%8D%20(Arranging%20Tickets)/">题解 AT2536 切符の手配 (Arranging Tickets)</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/23/Steiner%20%E4%B8%89%E5%85%83%E7%B3%BB%E5%AD%A6%E4%B9%A0%E5%B0%8F%E8%AE%B0/">Steiner 三元系学习小记</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/14/%E9%A2%98%E8%A7%A3%20P7975%20%E3%80%8CStoi2033%E3%80%8D%E5%88%86%E8%A3%82/">题解 P7975 「Stoi2033」分裂</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/08/%E9%A2%98%E8%A7%A3%20CF886E%20Maximum%20Element/">题解 CF886E Maximum Element</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/23/%E9%A2%98%E8%A7%A3%20CF1612F%20Armor%20and%20Weapons/">题解 CF1612F Armor and Weapons</a></li></ul>
         </div>
         
 
