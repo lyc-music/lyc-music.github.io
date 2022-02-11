@@ -115,6 +115,54 @@
     <div class="article-wrap">
         
             <h2 class="article-title cl">
+                <a href="/2021/09/16/题解 CF266D BerDonalds/" title="题解 CF266D BerDonalds">
+                    题解 CF266D BerDonalds
+                </a>
+            </h2>
+        
+
+        <ul class="article-extra" style="margin-bottom: 20px">
+            
+            <li class="article-time">
+                2021-09-16
+            </li>
+            
+
+            
+                
+            
+
+
+        </ul>
+        <div class="article-description">
+            
+            <p>考虑答案会是什么样子的。</p>
+<p>考虑一个点 <span class="math inline">\(a\)</span> 对于一条边 <span class="math inline">\((u,v,w)\)</span> 的答案，随着关键点不断从 <span class="math inline">\(u\)</span> 移动至 <span class="math inline">\(v\)</span> ，设关键点与 <span class="math inline">\(u\)</span> 的距离为 <span class="math inline">\(x\)</span>，答案一定是慢慢变大然后直到<span class="math inline">\(dis(a,u)+x=dis(a,v)+w-x\)</span>，然后答案慢慢变小。（这里假设 <span class="math inline">\(dis(a,u)\leq dis(a,v)\)</span>）。</p>
+<p>我们再考虑这个答案的极大值 <span class="math inline">\(dis(a,u)+x=dis(a,v)+w-x\)</span>，移项得 <span class="math inline">\(x=\frac{abs(dis(a,u)-dis(a,v))+w}{2}\)</span>。</p>
+<p>由于分子是正整数，我们发现 <span class="math inline">\(x\)</span> 的小数部分要么是 <span class="math inline">\(0\)</span> 要么是 <span class="math inline">\(0.5\)</span>。</p>
+<p>接下来考虑多个点对一条边答案的影响，我们发现将这些答案的变化放到坐标系上是若干条先向上再往下的折线<img src="https://oi-wiki.org//graph/images/mdst-plot2.svg" />。</p>
+<p>（图片来自 <span class="citation" data-cites="suxxsfe">@suxxsfe</span> 的题解，懒得画了。）</p>
+<p>显然答案就是若干个交点的最小值。</p>
+<p>那么考虑这东西怎么算，有一种简单的想法是把所有折线抠出来之后先按 <span class="math inline">\(dis(u,i)\)</span> 从小到大排序，然后单调栈维护一个 <span class="math inline">\(dis(v,i)\)</span> 递减的序列，所有的交点即为栈中相邻两个折线的交点。</p>
+<p>但是这样做是 <span class="math inline">\(O(n^3 \log n)\)</span> 的，显然不够。</p>
+<p>接着你会发现当我们按 <span class="math inline">\(dis(u,i)\)</span> 排序时与 <span class="math inline">\(dis(v,i)\)</span> 的顺序无关，然后枚举边的时候只要先固定 <span class="math inline">\(u\)</span> 排完序后，直接枚举别的 <span class="math inline">\(v\)</span> 直接扫就行了。</p>
+<p>总时间复杂度 <span class="math inline">\(O(n^3+n^2\log n)\)</span> 。</p>
+<p>至于算两条折线的交点，那直接把折点在前面的那条折线的前半部分往上折后变成两条斜率为 <span class="math inline">\(1\)</span> 的直线求交点 <span class="math inline">\(O(1)\)</span> 算就行。</p>
+        </div>
+        
+            
+                <a href="/2021/09/16/题解 CF266D BerDonalds/" class="more-link">阅读更多...</a>
+            
+        
+        
+    </div>
+</article>
+
+        
+            <article class="article">
+    <div class="article-wrap">
+        
+            <h2 class="article-title cl">
                 <a href="/2021/07/26/NOI2021 网络同步赛游记/" title="NOI2021 网络同步赛游记">
                     NOI2021 网络同步赛游记
                 </a>
@@ -336,7 +384,7 @@
         
         <div class="widget-post widget" style="order: 1 ">
             <h2 class="widget-title"><i class="fa fa-file-text"></i> 近期文章</h2>
-            <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2022/02/10/%E9%A2%98%E8%A7%A3%20P8119%20%E3%80%8CWdoi-1.5%E3%80%8D%E5%B9%BB%E6%83%B3%E4%B9%A1%E6%B8%B8%E8%A7%88%E8%AE%A1%E5%88%92/">题解 P8119 「Wdoi-1.5」幻想乡游览计划</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/25/YACS2022JAN%20%E9%A2%98%E8%A7%A3/">YACS2022 Jan 题解</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/18/CF%203000+%20%E5%8D%B7%E9%A2%98%E8%AE%B0%E5%BD%95/">CF 3000+ 好题卷题记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/04/%E9%A2%98%E8%A7%A3%20AT2536%20%E5%88%87%E7%AC%A6%E3%81%AE%E6%89%8B%E9%85%8D%20(Arranging%20Tickets)/">题解 AT2536 切符の手配 (Arranging Tickets)</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/23/Steiner%20%E4%B8%89%E5%85%83%E7%B3%BB%E5%AD%A6%E4%B9%A0%E5%B0%8F%E8%AE%B0/">Steiner 三元系学习小记</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/14/%E9%A2%98%E8%A7%A3%20P7975%20%E3%80%8CStoi2033%E3%80%8D%E5%88%86%E8%A3%82/">题解 P7975 「Stoi2033」分裂</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/08/%E9%A2%98%E8%A7%A3%20CF886E%20Maximum%20Element/">题解 CF886E Maximum Element</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/11/23/%E9%A2%98%E8%A7%A3%20CF1612F%20Armor%20and%20Weapons/">题解 CF1612F Armor and Weapons</a></li></ul>
+            <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2022/02/11/%E5%B0%8F%20trick%20%E5%90%88%E9%9B%86/">小 trick 合集</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/02/10/%E9%A2%98%E8%A7%A3%20P8119%20%E3%80%8CWdoi-1.5%E3%80%8D%E5%B9%BB%E6%83%B3%E4%B9%A1%E6%B8%B8%E8%A7%88%E8%AE%A1%E5%88%92/">题解 P8119 「Wdoi-1.5」幻想乡游览计划</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/25/YACS2022JAN%20%E9%A2%98%E8%A7%A3/">YACS2022 Jan 题解</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/18/CF%203000+%20%E5%8D%B7%E9%A2%98%E8%AE%B0%E5%BD%95/">CF 3000+ 好题卷题记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/04/%E9%A2%98%E8%A7%A3%20AT2536%20%E5%88%87%E7%AC%A6%E3%81%AE%E6%89%8B%E9%85%8D%20(Arranging%20Tickets)/">题解 AT2536 切符の手配 (Arranging Tickets)</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/23/Steiner%20%E4%B8%89%E5%85%83%E7%B3%BB%E5%AD%A6%E4%B9%A0%E5%B0%8F%E8%AE%B0/">Steiner 三元系学习小记</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/14/%E9%A2%98%E8%A7%A3%20P7975%20%E3%80%8CStoi2033%E3%80%8D%E5%88%86%E8%A3%82/">题解 P7975 「Stoi2033」分裂</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/08/%E9%A2%98%E8%A7%A3%20CF886E%20Maximum%20Element/">题解 CF886E Maximum Element</a></li></ul>
         </div>
         
 
