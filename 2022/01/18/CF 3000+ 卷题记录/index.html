@@ -229,7 +229,21 @@
 <p>标算是按操作分块，但是有一种牛一圈的做法。</p>
 <p>容易发现随着 <span class="math inline">\(k\)</span> 增大，红点数量在增多，也就是说对于每个点存在一个 <span class="math inline">\(k_i\)</span> 使得 <span class="math inline">\(k\leq k_i\)</span> 时该节点是蓝色。对于每个点维护这个确界即可。</p>
 <p>我们考虑类似动态 dp 的转移，设 <span class="math inline">\(f_{u,0/1}\)</span> 表示重儿子是 <code>R/B</code> 时只考虑轻儿子的确界，这个可以考虑把轻儿子维护一个平衡树做。然后考虑修改时发现这个确界的修改量大概是 <span class="math inline">\(O(1)\)</span> 的（不太会证，实际跑出来的结果确实像是 <span class="math inline">\(O(1)\)</span>）。</p>
-<p><span class="math inline">\(f\)</span> 的合并我目前只能感性理解，现在还不是特别懂。</p>
+<p><span class="math inline">\(f\)</span> 的合并考虑类似区间的合并即可。</p>
+<h2 id="cf1083d-the-fair-nuts-getting-crazy"><a href="%5BProblem%20-%201083D%20-%20Codeforces%5D(https://codeforces.com/problemset/problem/1083/D)">CF1083D The Fair Nut's getting crazy</a></h2>
+<p>给定一个长度为 <span class="math inline">\(n\)</span> 的序列 <span class="math inline">\(\{a_i\}\)</span>。你需要从该序列中选出两个非空的子段，这两个子段满足：</p>
+<ul>
+<li>两个子段非包含关系。</li>
+<li>两个子段存在交。</li>
+<li>位于两个子段交中的元素在每个子段中只能出现一次。</li>
+</ul>
+<p>求共有多少种不同的子段选择方案。输出总方案数对 <span class="math inline">\(10^9 + 7\)</span> 取模后的结果。</p>
+<p>需要注意的是，选择子段 <span class="math inline">\([a, b]\)</span>、<span class="math inline">\([c, d]\)</span> 与选择子段 <span class="math inline">\([c, d]\)</span>、<span class="math inline">\([a, b]\)</span> 被视为是相同的两种方案。</p>
+<p><span class="math inline">\(1 \leq n \leq 10^5, -10^9 \leq a_i \leq 10^9\)</span>。</p>
+<hr />
+<p>的确不太懂这为什么有 *3500</p>
+<p>发现这个限制并不是很好做，我们来转化一下，我们枚举子段 <span class="math inline">\([l,r]\)</span> 设左端点靠左的区间的左端点为 <span class="math inline">\(L\)</span>，另一个的右端点为 <span class="math inline">\(R\)</span>。那么有 <span class="math inline">\([l,r]\)</span> 中每个数前一次出现的位置都要小于 <span class="math inline">\(L\)</span>，同理下一次出现的位置要大于 <span class="math inline">\(R\)</span>。设 <span class="math inline">\(f_i\)</span> 为第 <span class="math inline">\(i\)</span> 个数上一次出现的位置，<span class="math inline">\(g_i\)</span> 为下一次出现的位置，答案相当于 <span class="math inline">\(\sum_l\sum_r[max(f_{l...r})&lt;l][r&lt;min(g_{l...r})](l-max(f_{l...r})-1)\times(min(g_{l...r})-r-1)\)</span>。</p>
+<p>枚举 <span class="math inline">\(l\)</span>，容易发现合法的最远的 <span class="math inline">\(r\)</span> 是单调的，双指针+线段树维护一下即可。</p>
 
         </div>
         
