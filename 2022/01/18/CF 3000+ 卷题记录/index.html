@@ -240,10 +240,21 @@
 <p>求共有多少种不同的子段选择方案。输出总方案数对 <span class="math inline">\(10^9 + 7\)</span> 取模后的结果。</p>
 <p>需要注意的是，选择子段 <span class="math inline">\([a, b]\)</span>、<span class="math inline">\([c, d]\)</span> 与选择子段 <span class="math inline">\([c, d]\)</span>、<span class="math inline">\([a, b]\)</span> 被视为是相同的两种方案。</p>
 <p><span class="math inline">\(1 \leq n \leq 10^5, -10^9 \leq a_i \leq 10^9\)</span>。</p>
+<p>傻逼 *3300，这种傻逼题放 div1E 建议出题人耗子尾汁。</p>
+<p>我们设第 <span class="math inline">\(i\)</span> 个位置的 <span class="math inline">\(\min(i-p_j)\)</span> 为 <span class="math inline">\(k\)</span>，考虑去枚举这个 <span class="math inline">\(k\)</span>，相当于是距离在 <span class="math inline">\(k-1\)</span> 以内的不选，然后发现不太好处理，容易想到差分一下计算大于等于 <span class="math inline">\(k\)</span> 的方案数。然后柿子能写成 <span class="math inline">\(P_{i+j}=\sum\sum [i&lt;j] F_i\times G_j\)</span> 的形式，直接分治 NTT 优化即可。（这个 trick 刚在博特的挑战赛里做过并且赛时切掉了）</p>
+<p>复杂度 <span class="math inline">\(O(n\log ^2 n)\)</span>。</p>
+<p>我的评价是这场 1C/D/E 难度严格小于 1B。</p>
+<h2 id="cf1515h-phoenix-and-bits"><a target="_blank" rel="noopener" href="http://codeforces.com/problemset/problem/1515/H">CF1515H Phoenix and Bits</a></h2>
+<p>维护大小为 <span class="math inline">\(n\)</span> 的集合 <span class="math inline">\(a\)</span>，<span class="math inline">\(q\)</span> 次操作：</p>
+<ul>
+<li><code>1 x y z</code>：将大小在 <span class="math inline">\(x\)</span> 到 <span class="math inline">\(y\)</span> 之间的数按位与 <span class="math inline">\(z\)</span>。</li>
+<li><code>2 x y z</code>：将大小在 <span class="math inline">\(x\)</span> 到 <span class="math inline">\(y\)</span> 之间的数按位或 <span class="math inline">\(z\)</span>。</li>
+<li><code>3 x y z</code>：将大小在 <span class="math inline">\(x\)</span> 到 <span class="math inline">\(y\)</span> 之间的数按位异或 <span class="math inline">\(z\)</span>。</li>
+<li><code>4 x y</code>：查询在 <span class="math inline">\(x\)</span> 到 <span class="math inline">\(y\)</span> 之间有多少个不同的数。</li>
+</ul>
+<p><span class="math inline">\(1\leqslant n\leqslant 2\times 10^5\)</span>，<span class="math inline">\(1\leqslant q\leqslant 10^5\)</span>。</p>
 <hr />
-<p>的确不太懂这为什么有 *3500</p>
-<p>发现这个限制并不是很好做，我们来转化一下，我们枚举子段 <span class="math inline">\([l,r]\)</span> 设左端点靠左的区间的左端点为 <span class="math inline">\(L\)</span>，另一个的右端点为 <span class="math inline">\(R\)</span>。那么有 <span class="math inline">\([l,r]\)</span> 中每个数前一次出现的位置都要小于 <span class="math inline">\(L\)</span>，同理下一次出现的位置要大于 <span class="math inline">\(R\)</span>。设 <span class="math inline">\(f_i\)</span> 为第 <span class="math inline">\(i\)</span> 个数上一次出现的位置，<span class="math inline">\(g_i\)</span> 为下一次出现的位置，答案相当于 <span class="math inline">\(\sum_l\sum_r[max(f_{l...r})&lt;l][r&lt;min(g_{l...r})](l-max(f_{l...r})-1)\times(min(g_{l...r})-r-1)\)</span>。</p>
-<p>枚举 <span class="math inline">\(l\)</span>，容易发现合法的最远的 <span class="math inline">\(r\)</span> 是单调的，双指针+线段树维护一下即可。</p>
+<p>势能线段树。玄学。玄学。</p>
 
         </div>
         
@@ -284,7 +295,7 @@
         
         <div class="widget-post widget" style="order: 1 ">
             <h2 class="widget-title"><i class="fa fa-file-text"></i> 近期文章</h2>
-            <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2022/03/04/%E3%80%8A%E5%85%B3%E4%BA%8E%E6%89%8B%E9%80%9F%E8%B6%85%E6%85%A2%E9%80%89%E6%89%8B%E8%AF%95%E5%9B%BE%E5%8F%AA%E8%BA%ABvpAGM2021%E8%B5%84%E6%A0%BC%E8%B5%9B%E8%BF%99%E4%BB%B6%E4%BA%8B%E3%80%8B/">《关于手速超慢选手试图只身vpAGM2021资格赛这件事》</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/02/11/%E5%B0%8F%20trick%20%E5%90%88%E9%9B%86/">小 trick 合集</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/02/10/%E9%A2%98%E8%A7%A3%20P8119%20%E3%80%8CWdoi-1.5%E3%80%8D%E5%B9%BB%E6%83%B3%E4%B9%A1%E6%B8%B8%E8%A7%88%E8%AE%A1%E5%88%92/">题解 P8119 「Wdoi-1.5」幻想乡游览计划</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/25/YACS2022JAN%20%E9%A2%98%E8%A7%A3/">YACS2022 Jan 题解</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/18/CF%203000+%20%E5%8D%B7%E9%A2%98%E8%AE%B0%E5%BD%95/">CF 3000+ 好题卷题记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/04/%E9%A2%98%E8%A7%A3%20AT2536%20%E5%88%87%E7%AC%A6%E3%81%AE%E6%89%8B%E9%85%8D%20(Arranging%20Tickets)/">题解 AT2536 切符の手配 (Arranging Tickets)</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/23/Steiner%20%E4%B8%89%E5%85%83%E7%B3%BB%E5%AD%A6%E4%B9%A0%E5%B0%8F%E8%AE%B0/">Steiner 三元系学习小记</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/14/%E9%A2%98%E8%A7%A3%20P7975%20%E3%80%8CStoi2033%E3%80%8D%E5%88%86%E8%A3%82/">题解 P7975 「Stoi2033」分裂</a></li></ul>
+            <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2022/03/07/AGM%202022%20%E8%B5%84%E6%A0%BC%E8%B5%9B%E8%A2%AB%E6%89%93%E7%88%86%E8%AE%B0/">AGM 2022 资格赛被打爆记</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/02/11/%E5%B0%8F%20trick%20%E5%90%88%E9%9B%86/">小 trick 合集</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/02/10/%E9%A2%98%E8%A7%A3%20P8119%20%E3%80%8CWdoi-1.5%E3%80%8D%E5%B9%BB%E6%83%B3%E4%B9%A1%E6%B8%B8%E8%A7%88%E8%AE%A1%E5%88%92/">题解 P8119 「Wdoi-1.5」幻想乡游览计划</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/25/YACS2022JAN%20%E9%A2%98%E8%A7%A3/">YACS2022 Jan 题解</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/18/CF%203000+%20%E5%8D%B7%E9%A2%98%E8%AE%B0%E5%BD%95/">CF 3000+ 好题卷题记录</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/04/%E9%A2%98%E8%A7%A3%20AT2536%20%E5%88%87%E7%AC%A6%E3%81%AE%E6%89%8B%E9%85%8D%20(Arranging%20Tickets)/">题解 AT2536 切符の手配 (Arranging Tickets)</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/23/Steiner%20%E4%B8%89%E5%85%83%E7%B3%BB%E5%AD%A6%E4%B9%A0%E5%B0%8F%E8%AE%B0/">Steiner 三元系学习小记</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/14/%E9%A2%98%E8%A7%A3%20P7975%20%E3%80%8CStoi2033%E3%80%8D%E5%88%86%E8%A3%82/">题解 P7975 「Stoi2033」分裂</a></li></ul>
         </div>
         
 
