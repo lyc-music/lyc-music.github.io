@@ -5,7 +5,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 	<meta name="description" content="">
 	<meta name="keywords" content="">
-	<title>题解 AT2300 [ARC068C] Snuke Line - LYC_music的小窝</title>
+	<title>CF 3000+ 好题卷题记录 Part 2 - LYC_music的小窝</title>
     <link rel="alternate" href="" type="application/atom+xml"/>
 	<link rel="shortcut icon" href=""/>
 	
@@ -111,14 +111,14 @@
     <div class="article-wrap">
         
             <h2 class="article-title cl">
-                题解 AT2300 [ARC068C] Snuke Line
+                CF 3000+ 好题卷题记录 Part 2
             </h2>
         
 
         <ul class="article-extra" style="margin-bottom: 20px">
             
             <li class="article-time">
-                2021-09-22
+                2022-03-08
             </li>
             
 
@@ -130,13 +130,45 @@
         </ul>
         <div class="article-description">
             
-            <p>这里有一种不需要脑子 <span class="math inline">\(O(n\ln n \log n)\)</span> 的做法。</p>
-<p>首先枚举 <span class="math inline">\(d\)</span> ，然后抠出所有 <span class="math inline">\(d\)</span> 的倍数以及 <span class="math inline">\(n\)</span>：<span class="math inline">\(a_1,a_2,a_3……,a_k,a_{k+1}=n\)</span>。</p>
-<p>考虑容斥，去算买不到的商品数，那么就是求</p>
-<p><span class="math display">\[\sum_{i=1}^{k}\sum_{j=1}^m 1[a_i&lt;l_j\leq r_j&lt;a_{i+1}]\]</span></p>
-<p>裸的二维数点问题，转化成矩形内求点数直接扫描线拆成四个点做就好了。</p>
-<p>有个 <span class="math inline">\(4\)</span> 的常数，不过还是很轻易的通过了本题。而且贼好写。 <span id="more"></span> ```c++ //QwQcOrZ yyds!!! #include&lt;bits/stdc++.h&gt; #define ll long long #define F(i,a,b) for (int i=(a);i&lt;=(b);i++) #define R(i,a,b) for (int i=(a);i&lt;(b);i++) #define D(i,a,b) for (int i=(a);i&gt;=(b);i--) #define go(i,x) for (int i=head[x];i;i=e[i].nx) #define IOS ios::sync_with_stdio(false) #define mp make_pair #define pb push_back #define pa pair &lt; int,int &gt; #define fi first #define se second #define re register #define be begin() #define en end() #define sqr(x) ((x)<em>(x)) #define ret return puts("-1"),0; #define put putchar('') #define inf 1000000005 #define mod 998244353 #define int ll #define N 300005 using namespace std; inline char gc(){static char buf[1000000],</em>p1=buf,<em>p2=buf;return p1==p2&amp;&amp;(p2=(p1=buf)+fread(buf,1,1000000,stdin),p1==p2)?EOF:</em>p1++;} #define gc getchar inline ll read(){char c=gc();ll su=0,f=1;for (;c&lt;'0'||c&gt;'9';c=gc()) if (c=='-') f=-1;for (;c&gt;='0'&amp;&amp;c&lt;='9';c=gc()) su=su<em>10+c-'0';return su</em>f;} inline void write(ll x){if (x&lt;0){putchar('-');write(-x);return;}if (x&gt;=10) write(x/10);putchar(x%10+'0');} inline void writesp(ll x){write(x),putchar(' ');} inline void writeln(ll x){write(x);putchar('');} int n,q,s[N],s1[N],sum,x,c[N]; int l,r; struct node { int id,x,fh; }; vector<node>G[N]; vector<int>S[N]; int a[N]; inline void update(int x,int y) { while (x&lt;=n) { c[x]+=y; x+=(x&amp;-x); } } inline int query(int x) { int res=0; while (x) { res+=c[x]; x-=(x&amp;-x); } return res; }</p>
-<p>signed main() { n=read(),q=read(); swap(n,q); for (int i=1;i&lt;=q;i++) { int l=read(),r=read(); s[r]++; s1[l]++; S[l].push_back(r); } for (int i=1;i&lt;=n;i++) s[i]+=s[i-1],s1[i]+=s1[i-1],a[i]=q; writeln(q); for (int i=2;i&lt;=n;i++) { for (int j=0;j&lt;=n;j+=i) { l=j+1,r=min(n,j+i-1); G[l-1].push_back({i,r,-1}); G[l-1].push_back({i,l-1,1}); G[r].push_back({i,r,1}); G[r].push_back({i,l-1,-1}); } } for (int i=1;i&lt;=n;i++) { for (auto u:S[i]) { update(u,1); } for (auto u:G[i]) { a[u.id]-=u.fh<em>query(u.x); } } for (int i=2;i&lt;=n;i++) writeln(a[i]); } /</em> */</p>
+            <p>怕做难题后过些天就又不会了，于是回来写写看看自己还能想起来多少。</p>
+<span id="more"></span>
+<h2 id="cf1641e-special-positions"><a target="_blank" rel="noopener" href="https://codeforces.com/problemset/problem/1641/E">CF1641E Special Positions</a></h2>
+<p>给定长度为 <span class="math inline">\(n\)</span> 的数组 <span class="math inline">\(a\)</span>，长度为 <span class="math inline">\(m\)</span> 的数组 <span class="math inline">\(p\)</span>，其中 <span class="math inline">\(1 \le p_i \le n\)</span> ，而且 <span class="math inline">\(\forall j, p_i \not = p_j\)</span>。</p>
+<p>在 <span class="math inline">\(p\)</span> 中等概率选定一个非空集合，求 <span class="math inline">\(\sum_{i = 1} ^ n a_i \times |i - p_j|\)</span> 其中 <span class="math inline">\(p_j\)</span> 是选定集合中 <span class="math inline">\(|i - p_j|\)</span> 最小的 <span class="math inline">\(p\)</span>。</p>
+<p><span class="math inline">\(m \le n \le 10^5, a_i \le 998244352, 1 \le p_i \le n, p_i\)</span> 两两不同。</p>
+<hr />
+<p>傻逼 *3300，这种傻逼题放 div1E 建议出题人耗子尾汁。</p>
+<p>我们设第 <span class="math inline">\(i\)</span> 个位置的 <span class="math inline">\(\min(i-p_j)\)</span> 为 <span class="math inline">\(k\)</span>，考虑去枚举这个 <span class="math inline">\(k\)</span>，相当于是距离在 <span class="math inline">\(k-1\)</span> 以内的不选，然后发现不太好处理，容易想到差分一下计算大于等于 <span class="math inline">\(k\)</span> 的方案数。然后柿子能写成 <span class="math inline">\(P_{i+j}=\sum\sum [i&lt;j] F_i\times G_j\)</span> 的形式，直接分治 NTT 优化即可。（这个 trick 刚在博特的挑战赛里做过并且赛时切掉了）</p>
+<p>复杂度 <span class="math inline">\(O(n\log ^2 n)\)</span>。</p>
+<p>我的评价是这场 1C/D/E 难度严格小于 1B。</p>
+<h2 id="cf1515h-phoenix-and-bits"><a target="_blank" rel="noopener" href="http://codeforces.com/problemset/problem/1515/H">CF1515H Phoenix and Bits</a></h2>
+<p>维护大小为 <span class="math inline">\(n\)</span> 的集合 <span class="math inline">\(a\)</span>，<span class="math inline">\(q\)</span> 次操作：</p>
+<ul>
+<li><code>1 x y z</code>：将大小在 <span class="math inline">\(x\)</span> 到 <span class="math inline">\(y\)</span> 之间的数按位与 <span class="math inline">\(z\)</span>。</li>
+<li><code>2 x y z</code>：将大小在 <span class="math inline">\(x\)</span> 到 <span class="math inline">\(y\)</span> 之间的数按位或 <span class="math inline">\(z\)</span>。</li>
+<li><code>3 x y z</code>：将大小在 <span class="math inline">\(x\)</span> 到 <span class="math inline">\(y\)</span> 之间的数按位异或 <span class="math inline">\(z\)</span>。</li>
+<li><code>4 x y</code>：查询在 <span class="math inline">\(x\)</span> 到 <span class="math inline">\(y\)</span> 之间有多少个不同的数。</li>
+</ul>
+<p><span class="math inline">\(1\leqslant n\leqslant 2\times 10^5\)</span>，<span class="math inline">\(1\leqslant q\leqslant 10^5\)</span>。</p>
+<hr />
+<p>势能。玄学。玄学。</p>
+<p>考虑建出 trie 树，发现异或操作是简单的，直接打标记就行。</p>
+<p>而按位与可以通过异或和按位或来完成，所以本质上问题只剩下了按位或。</p>
+<p>我们考虑直接暴力把这一段的 trie 树分裂出来，然后做完后合并回去。</p>
+<p>考虑当一个子树内所有节点的按位或操作可以用异或完成的时候就直接打标记走人，它的复杂度是 <span class="math inline">\(O(n \log^2 n)\)</span>。</p>
+<p>我们定义势能函数 <span class="math inline">\(\Psi\)</span> 为 <span class="math inline">\(\tt trie\)</span> 树中节点个数，初始时 <span class="math inline">\(\Psi=O(n\log n)\)</span>。</p>
+<p>异或只在提取出的树根上操作，势能函数不变，异或花费 <span class="math inline">\(1\)</span>，势能函数减少 <span class="math inline">\(0\)</span>。</p>
+<p>设按位或操作在深度为 <span class="math inline">\(k\)</span> 一层退出过 <span class="math inline">\(\zeta_k\)</span> 个节点，则说明其与其兄弟节点会合并，势能函数最少减小 <span class="math inline">\(\Delta \Psi=\sum\frac{\zeta_k}{2}\)</span>,花费 <span class="math inline">\(\sum\zeta_kk=O((\sum\zeta_k)\log n)\)</span>，均摊时间复杂度<span class="math inline">\(O(\log n)\)</span>。</p>
+<p>每次提取操作新增 <span class="math inline">\(O(\log n)\)</span> 个,故 <span class="math inline">\(\Psi_{\max}=O(n\log n)\)</span>。</p>
+<p>所以时间复杂度为 <span class="math inline">\(O(n\log^2 n)\)</span>。</p>
+<h2 id="cf1034d-intervals-of-intervals"><a target="_blank" rel="noopener" href="http://codeforces.com/problemset/problem/1034/D">CF1034D Intervals of Intervals</a></h2>
+<p>有 <span class="math inline">\(n\)</span> 个区间 <span class="math inline">\([a_i,b_i]\)</span> 定义区间的区间 <span class="math inline">\([l,r]\)</span> 的价值是第 <span class="math inline">\(l\)</span> 个区间到第 <span class="math inline">\(r\)</span> 个区间的并的长度，找出 <span class="math inline">\(k\)</span> 个不同的区间的区间，使得总价值最大。</p>
+<p><span class="math inline">\(1 \leq n \leq 3 \times 10^5\)</span>，<span class="math inline">\(1 \leq k \leq \min(\frac{n(n+1)}{2},10^9)\)</span>。</p>
+<hr />
+<p>比较简单的题。</p>
+<p>考虑一个过程，我们枚举右端点 <span class="math inline">\(R\)</span>，然后维护每个 <span class="math inline">\(f_L\)</span> 为以 <span class="math inline">\(L\)</span> 为左端点以 <span class="math inline">\(R\)</span> 为右段点的答案。我们设 <span class="math inline">\(lst_i\)</span> 为第 <span class="math inline">\(i\)</span> 个位置最后一次覆盖它的线段是什么，那么本质上相当于是 <span class="math inline">\([l,r]\)</span> 去覆盖整段区间，然后对每一个 <span class="math inline">\([lst_i+1,R]\)</span> 加 <span class="math inline">\(1\)</span>。用 set 维护 <span class="math inline">\(lst_i\)</span> 相等的段树状数组区间加即可做到 <span class="math inline">\(O(n \log n)\)</span> 的复杂度。</p>
+<p>然后我们考虑二分第 <span class="math inline">\(k\)</span> 大区间的价值，首先我们发现 <span class="math inline">\(f\)</span> 一定是单调的，所以我们可以双指针维护。每次二分 check 的时候做上面这部分是 <span class="math inline">\(O(n\log ^2 n)\)</span> 的。但是我们很快就发现上面这部分是重复的，做一遍就行，区间加也可以直接用差分做，所以这道简单题就做完了。</p>
+<p>时间复杂度 <span class="math inline">\(O(n \log n)\)</span>。</p>
 
         </div>
         
@@ -145,20 +177,16 @@
         <div class="article-tags">
             <ul class="tags-list cl">
                 
-                <li><a href="/tags/题解/"><i class="fa fa-tag"></i>题解</a></li>
+                <li><a href="/tags/小记/"><i class="fa fa-tag"></i>小记</a></li>
                 
             </ul>
         </div>
         
         <div class="article-pagination cl">
         
-            <div class="pagination-prev">
-                <a href="/2021/09/24/%E9%A2%98%E8%A7%A3%20CF1574D%20The%20Strongest%20Build/">题解 CF1574D The Strongest Build</a>
-            </div>
-        
         
             <div class="pagination-next">
-                <a href="/2021/09/18/%E9%A2%98%E8%A7%A3%20AT2161%20%5BARC065D%5D%20%E3%82%B7%E3%83%A3%E3%83%83%E3%83%95%E3%83%AB%20%20Shuffling/">题解 AT2161 [ARC065D] シャッフル  Shuffling</a>
+                <a href="/2022/03/07/AGM%202022%20%E8%B5%84%E6%A0%BC%E8%B5%9B%E8%A2%AB%E6%89%93%E7%88%86%E8%AE%B0/">AGM 2022 资格赛被打爆记</a>
             </div>
         
         </div>
