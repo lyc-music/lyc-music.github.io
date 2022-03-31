@@ -115,85 +115,6 @@
     <div class="article-wrap">
         
             <h2 class="article-title cl">
-                <a href="/2021/11/23/题解 CF1612F Armor and Weapons/" title="题解 CF1612F Armor and Weapons">
-                    题解 CF1612F Armor and Weapons
-                </a>
-            </h2>
-        
-
-        <ul class="article-extra" style="margin-bottom: 20px">
-            
-            <li class="article-time">
-                2021-11-23
-            </li>
-            
-
-            
-                
-            
-
-
-        </ul>
-        <div class="article-description">
-            
-            <p>设 <span class="math inline">\(f_{i,j}\)</span> 为 <span class="math inline">\((i,j)\)</span> 是否在列表里。<span class="math inline">\(dp_{i,j}\)</span> 为第 <span class="math inline">\(i\)</span> 步时，盔甲为 <span class="math inline">\(j\)</span> 的时候能得到的武器最大值，转移很容易 <span class="math inline">\(dp_{i+1,j}=\max(\min(m,dp_{i,j}+j+f_{j,dp_{i,j}}),dp_{i+1,j}),dp_{i+1,\min(n,dp_{i,j}+j+f_{j,dp_{i,j}})}=\max(dp_{i+1,\min(n,dp_{i,j}+j+f_{j,dp_{i,j}})},dp_{i,j})\)</span>。</p>
-<p>暴力转移是 <span class="math inline">\(\text{ans}\times n\)</span> 的。注意到当 <span class="math inline">\(n\leq m\)</span> 时，答案上界近似是 <span class="math inline">\(\log+\frac{m}{n}\)</span> 的，所以总复杂度不超过 <span class="math inline">\(n\log n+m\)</span>。</p>
-        </div>
-        
-            
-                <a href="/2021/11/23/题解 CF1612F Armor and Weapons/" class="more-link">阅读更多...</a>
-            
-        
-        
-    </div>
-</article>
-
-        
-            <article class="article">
-    <div class="article-wrap">
-        
-            <h2 class="article-title cl">
-                <a href="/2021/11/21/梦碎 NOIP2021/" title="梦碎 NOIP2021">
-                    梦碎 NOIP2021
-                </a>
-            </h2>
-        
-
-        <ul class="article-extra" style="margin-bottom: 20px">
-            
-            <li class="article-time">
-                2021-11-21
-            </li>
-            
-
-            
-                
-            
-
-
-        </ul>
-        <div class="article-description">
-            
-            <h3 id="day--3">Day -3</h3>
-<p>身体状况不太好，早上的模拟赛鸽掉了。</p>
-<p>下午补了三道题，马AK的题道道都是阴间题。</p>
-<p>造好了 QwQcOrZ 的数据结构题 2021 I（QwQOI2021 I），并让初三的老哥帮忙想乱搞做法卡我数据/dz</p>
-<p>感觉还是一道比较板的题，不知道以后可以放到哪里。</p>
-        </div>
-        
-            
-                <a href="/2021/11/21/梦碎 NOIP2021/" class="more-link">阅读更多...</a>
-            
-        
-        
-    </div>
-</article>
-
-        
-            <article class="article">
-    <div class="article-wrap">
-        
-            <h2 class="article-title cl">
                 <a href="/2021/11/08/题解 CF1131E String Multiplication/" title="题解 CF1131E String Multiplication">
                     题解 CF1131E String Multiplication
                 </a>
@@ -520,6 +441,93 @@
 </article>
 
         
+            <article class="article">
+    <div class="article-wrap">
+        
+            <h2 class="article-title cl">
+                <a href="/2021/09/22/题解 AT2300 [ARC068C] Snuke Line/" title="题解 AT2300 [ARC068C] Snuke Line">
+                    题解 AT2300 [ARC068C] Snuke Line
+                </a>
+            </h2>
+        
+
+        <ul class="article-extra" style="margin-bottom: 20px">
+            
+            <li class="article-time">
+                2021-09-22
+            </li>
+            
+
+            
+                
+            
+
+
+        </ul>
+        <div class="article-description">
+            
+            <p>这里有一种不需要脑子 <span class="math inline">\(O(n\ln n \log n)\)</span> 的做法。</p>
+<p>首先枚举 <span class="math inline">\(d\)</span> ，然后抠出所有 <span class="math inline">\(d\)</span> 的倍数以及 <span class="math inline">\(n\)</span>：<span class="math inline">\(a_1,a_2,a_3……,a_k,a_{k+1}=n\)</span>。</p>
+<p>考虑容斥，去算买不到的商品数，那么就是求</p>
+<p><span class="math display">\[\sum_{i=1}^{k}\sum_{j=1}^m 1[a_i&lt;l_j\leq r_j&lt;a_{i+1}]\]</span></p>
+<p>裸的二维数点问题，转化成矩形内求点数直接扫描线拆成四个点做就好了。</p>
+<p>有个 <span class="math inline">\(4\)</span> 的常数，不过还是很轻易的通过了本题。而且贼好写。
+        </div>
+        
+            
+                <a href="/2021/09/22/题解 AT2300 [ARC068C] Snuke Line/" class="more-link">阅读更多...</a>
+            
+        
+        
+    </div>
+</article>
+
+        
+            <article class="article">
+    <div class="article-wrap">
+        
+            <h2 class="article-title cl">
+                <a href="/2021/09/18/题解 AT2161 [ARC065D] シャッフル  Shuffling/" title="题解 AT2161 [ARC065D] シャッフル  Shuffling">
+                    题解 AT2161 [ARC065D] シャッフル  Shuffling
+                </a>
+            </h2>
+        
+
+        <ul class="article-extra" style="margin-bottom: 20px">
+            
+            <li class="article-time">
+                2021-09-18
+            </li>
+            
+
+            
+                
+            
+
+
+        </ul>
+        <div class="article-description">
+            
+            <p>FTY 的做法太神仙了，我疯狂膜拜。</p>
+<p>首先容易发现，可以将完全包含的区间全部去掉。</p>
+<p>接下来设 <span class="math inline">\(R_i\)</span> 表示通过操作能走到 <span class="math inline">\(i\)</span> 位置的最远位置，这个可以轻松求出来，并且满足 <span class="math inline">\(R_{i-1}\leq R_i\)</span>。</p>
+<p>我们接下来去思考通过确定每个位置是 <span class="math inline">\(0/1\)</span> 来确定方案数。</p>
+<p>接下来就是一个很神的 dp 状态设计，设 <span class="math inline">\(dp_{i,j}\)</span> 为确定了 <span class="math inline">\(1\sim i-1\)</span> 的取值后，<span class="math inline">\(i\sim R_i\)</span> 中有 <span class="math inline">\(j\)</span> 个 <span class="math inline">\(1\)</span> 的方案。</p>
+<p>考虑 <span class="math inline">\(i\)</span> 向右移的时候会有多少个新增的 <span class="math inline">\(1\)</span> 能移到 <span class="math inline">\(i\)</span> 位置，显然为 <span class="math inline">\(s_{R_{i}}-s_{R_{i-1}}\)</span>，<span class="math inline">\(s_i\)</span> 表示 <span class="math inline">\(1\sim i\)</span> 的 <span class="math inline">\(1\)</span> 的个数。</p>
+<p>设 <span class="math inline">\(x=s_{R_{i}}-s_{R_{i-1}}\)</span>，那么有 <span class="math inline">\(dp_{i,j}=dp_{i-1,j-x}+dp_{i-1,j-x+1}\)</span> ，第一种转移是 <span class="math inline">\(i-1\)</span> 的位置放 <span class="math inline">\(0\)</span>，第二种表示放 <span class="math inline">\(1\)</span>。</p>
+<p>这样子转移需要判一些特殊情况，比如 <span class="math inline">\(j-x&gt; R_{i-1}-i+1\)</span>，这个时候是不能转移的，因为从上一个区间转移过来的最多的 <span class="math inline">\(1\)</span> 的个数一定是当前这个区间与上一个区间的交的长度。</p>
+<p>注意到这样子答案并不是 <span class="math inline">\(dp_{n,0}\)</span>，因为第 <span class="math inline">\(n\)</span> 个位置放什么还没有确定过，所以要在原字符串后加上一个 <span class="math inline">\(0\)</span>，答案为 <span class="math inline">\(dp_{n+1,0}\)</span>。
+        </div>
+        
+            
+                <a href="/2021/09/18/题解 AT2161 [ARC065D] シャッフル  Shuffling/" class="more-link">阅读更多...</a>
+            
+        
+        
+    </div>
+</article>
+
+        
         <ul class="pagination clear">
     <a class="extend prev" rel="prev" href="/">上一页</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">下一页</a>
 </ul>
@@ -533,7 +541,7 @@
         
         <div class="widget-post widget" style="order: 1 ">
             <h2 class="widget-title"><i class="fa fa-file-text"></i> 近期文章</h2>
-            <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2022/03/08/hind/CF%203000+%20%E5%8D%B7%E9%A2%98%E8%AE%B0%E5%BD%95%20Part2/">CF 3000+ 好题卷题记录 Part 2</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/03/07/AGM%202022%20%E8%B5%84%E6%A0%BC%E8%B5%9B%E8%A2%AB%E6%89%93%E7%88%86%E8%AE%B0/">AGM 2022 资格赛被打爆记</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/02/11/%E5%B0%8F%20trick%20%E5%90%88%E9%9B%86/">小 trick 合集</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/02/10/%E9%A2%98%E8%A7%A3%20P8119%20%E3%80%8CWdoi-1.5%E3%80%8D%E5%B9%BB%E6%83%B3%E4%B9%A1%E6%B8%B8%E8%A7%88%E8%AE%A1%E5%88%92/">题解 P8119 「Wdoi-1.5」幻想乡游览计划</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/25/YACS2022JAN%20%E9%A2%98%E8%A7%A3/">YACS2022 Jan 题解</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/18/hind/CF%203000+%20%E5%8D%B7%E9%A2%98%E8%AE%B0%E5%BD%95%20Part1/">CF 3000+ 好题卷题记录 Part 1</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/04/%E9%A2%98%E8%A7%A3%20AT2536%20%E5%88%87%E7%AC%A6%E3%81%AE%E6%89%8B%E9%85%8D%20(Arranging%20Tickets)/">题解 AT2536 切符の手配 (Arranging Tickets)</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/23/Steiner%20%E4%B8%89%E5%85%83%E7%B3%BB%E5%AD%A6%E4%B9%A0%E5%B0%8F%E8%AE%B0/">Steiner 三元系学习小记</a></li></ul>
+            <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2022/03/07/AGM%202022%20%E8%B5%84%E6%A0%BC%E8%B5%9B%E8%A2%AB%E6%89%93%E7%88%86%E8%AE%B0/">AGM 2022 资格赛被打爆记</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/02/11/%E5%B0%8F%20trick%20%E5%90%88%E9%9B%86/">小 trick 合集</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/02/10/%E9%A2%98%E8%A7%A3%20P8119%20%E3%80%8CWdoi-1.5%E3%80%8D%E5%B9%BB%E6%83%B3%E4%B9%A1%E6%B8%B8%E8%A7%88%E8%AE%A1%E5%88%92/">题解 P8119 「Wdoi-1.5」幻想乡游览计划</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/25/YACS2022JAN%20%E9%A2%98%E8%A7%A3/">YACS2022 Jan 题解</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/01/04/%E9%A2%98%E8%A7%A3%20AT2536%20%E5%88%87%E7%AC%A6%E3%81%AE%E6%89%8B%E9%85%8D%20(Arranging%20Tickets)/">题解 AT2536 切符の手配 (Arranging Tickets)</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/23/Steiner%20%E4%B8%89%E5%85%83%E7%B3%BB%E5%AD%A6%E4%B9%A0%E5%B0%8F%E8%AE%B0/">Steiner 三元系学习小记</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/14/%E9%A2%98%E8%A7%A3%20P7975%20%E3%80%8CStoi2033%E3%80%8D%E5%88%86%E8%A3%82/">题解 P7975 「Stoi2033」分裂</a></li><li class="post-list-item"><a class="post-list-link" href="/2021/12/08/%E9%A2%98%E8%A7%A3%20CF886E%20Maximum%20Element/">题解 CF886E Maximum Element</a></li></ul>
         </div>
         
 
